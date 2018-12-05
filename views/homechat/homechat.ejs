@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   
+    <!-- Latest compiled and minified CSS & JS -->
+    <link rel="shortcut icon" type="image/png" href="./images/favicon2.png"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" media="screen" href="./asset/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link rel="stylesheet" href="./stylesheets/homechat/style_homechat.css">
+    <link rel="stylesheet" href="./stylesheets/homechat/style_option_group_chat.css">
+    <link rel="stylesheet" href="./stylesheets/homechat/style_search_message.css">
+    <title>ChatWork</title>
+
+</head>
+<body>
+<div class="app">
+    <div class="app-one">
+        <div class="col-sm-3 side">
+            <!--------LIST MESSAGE HISTORY-->
+            <div class="side-one">
+                <div class="row heading">
+                    <div class="col-sm-2 col-xs-3 heading-avatar" >
+                        <div class="heading-avatar-icon" style="position: relative;;" id="">
+                            <img src="./images/avatar6.png">
+                            <span style="display: block; width: 15px; height: 15px; background-color: green;border-radius: 50%;position: absolute;bottom: 0;right: 38px;"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 heading-username" style="padding:0;">
+                        <p style="font-size: 14px;margin-top: 20px;font-weight: bold">username </p>
+                    </div>
+                    <div class="col-sm-1 col-xs-2  heading-compose  pull-right" id="btn-click-logout">
+                        <a href="logout">
+                            <span class="glyphicon glyphicon-log-out pull-right"  data-toggle="tooltip" title="Đăng xuất" data-placement="bottom" ></span>
+                        </a>
+                    </div>
+                    <div class="col-sm-2 col-xs-2 heading-compose  pull-right" id="btn-click-chat-group">
+                        <span class="glyphicon glyphicon-edit pull-right" data-toggle="tooltip" title="Chat Nhóm" data-placement="bottom"></span>
+                    </div>
+                    <div class="col-sm-2 col-xs-3 heading-compose  pull-right" id="btn-click-notification" >
+                       <span class="glyphicon glyphicon-globe pull-right" data-toggle="tooltip" data-placement="bottom" title="Thông báo">
+                           <span class="notification notification-blobe notification-count"></span>
+                       </span>
+                    </div>
+                </div>
+
+                <div class="row searchBox">
+                    <div class="col-sm-12 searchBox-inner">
+                        <div class="form-group has-feedback">
+                            <input id="searchText" type="text" class="form-control" name="searchText" placeholder="Tìm kiếm cuộc trò chuyện">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row sideBar list-message-history" >
+
+                    <!--load private message -->
+                    
+
+                    <div class="row sideBar-body" id=""  >
+                        <div class="col-sm-3 col-xs-3 sideBar-avatar">
+                            <div class="avatar-icon">
+                                <img src="./images/avatar6.png">
+                            </div>
+                        </div>
+                        <div class="col-sm-9 col-xs-9 sideBar-main">
+                            <div class="row">
+                                <div class="col-sm-8 col-xs-8 sideBar-name">
+                                    <p class="name-meta" ><strong>username</strong></p>
+                                    <p class="message-history">old message nguyen dang khoa hoc vien cong nghe</p>
+                                </div>
+                                <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
+                                    <span class="time-meta pull-right">time message</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                  <!--  @endforeach -->
+
+                    <! --load group message-- >
+                    <div class="row sideBar-body" data-group-id="" data-name-room=""   >
+                        <div class="col-sm-3 col-xs-3 sideBar-avatar">
+                            <div class="avatar-icon">
+                                <img src="./images/avatar6.png">
+                            </div>
+                        </div>
+                        <div class="col-sm-9 col-xs-9 sideBar-main">
+                            <div class="row">
+                                <div class="col-sm-8 col-xs-8 sideBar-name">
+                                    <p class="name-meta" ><strong>Group Name</strong></p>
+                                    <p class="message-history">old message group nguyen dang khoa ptit</p></p>
+
+                                </div>
+                                <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
+                                    <span class="time-meta pull-right">time meesage group</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!---------END LIST MESSAGE HISTORY-- >
+
+            <!--PHẦN DÀNH CHO NOTIFICATION-->
+            <div class="side-two">
+                <div class="row newMessage-heading">
+                    <div class="row newMessage-main">
+                        <div class="col-sm-2 col-xs-2 newMessage-back">
+                            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-sm-10 col-xs-10 newMessage-title">
+                            THÔNG BÁO
+                        </div>
+                    </div>
+                </div>
+                <div class="row compose-sideBar list-notification">
+                    <div class="row sideBar-body" >
+                        <div class="col-sm-2 col-xs-2 sideBar-avatar">
+                            <div class="avatar-icon">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                            </div>
+                        </div>
+                        <div class="col-sm-10 col-xs-10 sideBar-main">
+                            <div class="row">
+                                <p class="name-meta" ><strong>Đăng Khoa</strong> đã gửi tin nhắn cho bạn</p>
+                                <p class="message-history time-notification" >21/8/2018 3:45pm</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!----KẾT THÚC PHẦN DÀNH CHO THÔNG BÁO-->
+        </div>
+        <!---------------BOX CHAT------------------>
+        <div class="col-sm-7 conversation" style="overflow: hidden">
+            <div class="row heading">
+                <div class="col-sm-2 col-md-1 col-xs-3 heading-avatar">
+                    <div class="heading-avatar-icon heading-avatar-icon-recipient" id="">
+                        <img src="./images/avatar6.png">
+                    </div>
+                </div>
+                <div class="col-sm-8 col-xs-7 heading-name">
+                    <a class="heading-name-meta">Username </a>
+                    <span class="heading-online">Online</span>
+                </div>
+            </div>
+            <div class="row message" id="conversation" style="background-color:white;">
+                <div class="row message-previous" >
+                    <div class="col-sm-12 previous">
+                        <a href="#" id="btn-click-load-pre-message"> Show Previous Message!</a>
+                    </div>
+                </div>
+
+                <div class="row list-message" style="margin-top: 20px;">
+                    <img src="./images/background_chat.jpg" style="display: block;width: 50%;height: 70%;margin: 50px auto;">
+                </div>
+            </div>
+            <div class="row reply"  >
+
+                <div class="col-sm-10 col-xs-10 reply-main">
+                    <input class="form-control" rows="1"  placeholder="nhập nội dung tin nhắn" id="comment">
+                </div>
+                <div class="col-sm-1 col-xs-1 reply-recording">
+                    <i class="fa fa-microphone fa-2x" aria-hidden="true"></i>
+                </div>
+                <div class="col-sm-1 col-xs-1 reply-send"  id="btn-click-send-message">
+                    <i class="fa fa-send fa-2x" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+        <!----------------END BOX CHAT-------------->
+
+        <!----------------LIST USER ONLINE----------->
+        <div class="col-sm-2 users-online" style="border-left:1px solid lightgray;padding: 0;overflow: hidden;">
+            <div class="row heading">
+                <p style="margin-top: 10px"><strong>DANH SÁCH USER ONLINE</strong></p>
+            </div>
+            <div class="row message list-user-online">
+                
+                <div class="row user-chat-body" id="">
+                    <div class="col-sm-3 col-xs-3 user-chat-avatar">
+                        <div class="user-chat-avatar-icon">
+                            <img src="./images/avatar6.png">
+                        </div>
+                    </div>
+                    <div class="col-sm-9 col-xs-9 user-chat-main">
+                        <div class="row">
+                            <div class="col-sm-8 col-xs-8 user-chat-name">
+                                <span class="user-chat-name-meta">username online</span>
+                            </div>
+                            <div class="col-sm-4 col-xs-4 pull-right ">
+                                <span class="time-meta pull-right "><span class="user-state"></span></span>
+                            </div>
+                        </div>
+                    </div>
+								</div>
+								<div class="row user-chat-body" id="">
+								<div class="col-sm-3 col-xs-3 user-chat-avatar">
+										<div class="user-chat-avatar-icon">
+												<img src="./images/avatar6.png">
+										</div>
+								</div>
+								<div class="col-sm-9 col-xs-9 user-chat-main">
+										<div class="row">
+												<div class="col-sm-8 col-xs-8 user-chat-name">
+														<span class="user-chat-name-meta">username online</span>
+												</div>
+												<div class="col-sm-4 col-xs-4 pull-right ">
+														<span class="time-meta pull-right "><span class="user-state"></span></span>
+												</div>
+									 	</div>
+								  </div>
+						   </div>
+             
+
+            </div>
+            <div class="row reply" style="background-color: white" >
+                <div class="col-sm-12 searchBox-inner" style="margin-top: -8px">
+                    <div class="form-group has-feedback">
+                        <input id="searchUser" type="text" class="form-control" name="searchUser" placeholder="Tìm kiếm user online">
+                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!----------------END LIST USER  ONLINE------>
+    </div>
+
+    <!--PHẦN KHÔNG HIỂN THỊ TRỰC TIẾP - MODAL-->
+    <!--1.modal change color-->
+    <div class="modal fade animated  zoomIn" id="modal-change-color" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p ><strong>Chọn màu sắc cho cuộc trò chuyện này</strong></p>
+                    <p>Mọi người trong cuộc trò chuyện sẽ nhìn thấy sự thay đổi này</p>
+                </div>
+                <div class="modal-body">
+                    <div class="list-color">
+                        <div class="box box1" data-color="rgb(0, 132, 255)"></div>
+                        <div class="box box2"data-color="rgb(68, 190, 199)"></div>
+                        <div class="box box3" data-color="#ffc300"></div>
+                        <div class="box box4" data-color="#fa3c4c"></div>
+                        <div class="box box5" data-color="#d696bb"></div>
+                        <div class="box box6" data-color="#6699cc"></div>
+                        <div class="box box7" data-color="#13cf13"></div>
+                        <div class="box box8" data-color="#ff7e29"></div>
+                        <div class="box box9" data-color="#e68585"></div>
+                        <div class="box box10" data-color="#7646ff"></div>
+                        <div class="box box11" data-color="#20cef5"></div>
+                        <div class="box box12" data-color="#67b868"></div>
+                        <div class="box box13" data-color="#d4a88c"></div>
+                        <div class="box box14" data-color="#ff5ca1"></div>
+                        <div class="box box15" data-color="#a695c7"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="btn-click-hide-modal-change-color"data-dismiss="modal">Hủy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end modal change color-->
+
+    <!--2. modal change name-member-->
+    <div class="modal fade animated  zoomIn" id="modal-change-name-member" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center " >
+                    <p><strong>Chỉnh sửa biệt danh </strong></p>
+                </div>
+                <div class="modal-body">
+                    <div class="list-member" >
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="btn-click-hide-modal-change-name-member"data-dismiss="modal">Hủy</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--end modal change name member-->
+
+    <!--3. sub modal change name member-->
+    <div class="modal fade animated  zoomIn" id="sub-modal-change-name-member" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p ><strong>Chỉnh sửa biệt danh cho <span class="name-member">Nguyễn Đăng Khoa</span></strong></p>
+                    <p>Mọi người trong cuộc trò chuyện sẽ nhìn thấy sự thay đổi này</p>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" name="name-member" id="txt-name-member" placeholder="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="btn-click-change-name-member"data-dismiss="modal" style="font-weight: bold;color: #0084ff;">Lưu</button>
+                    <button type="button" class="btn btn-default" id="btn-click-hide-sub-modal-change-name-member"data-dismiss="modal" style="color: #0084ff;">Hủy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end  sub modal change name member-->
+
+    <!--3. modal change name  group-->
+    <div class="modal fade animated  zoomIn" id="modal-change-name-group" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p ><strong>Chỉnh sửa tên của cuộc trò chuyện</strong></p>
+                    <p>Mọi người trong cuộc trò chuyện sẽ nhìn thấy sự thay đổi này</p>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" name="name-member" id="txt-name-group" placeholder="đặt tên của cuộc trò chuyện">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="btn-click-change-name-group"data-dismiss="modal" style="font-weight: bold;color: #0084ff;">Lưu</button>
+                    <button type="button" class="btn btn-default" id="btn-click-hide-modal-change-name-group"data-dismiss="modal" style="color: #0084ff;">Hủy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end modal change name group-->
+
+    <!--4. modal add user  to group-->
+    <div class="modal fade animated  zoomIn" id="modal-add-user-to-group" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 500px;">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <p style="font-size: 14px;"><strong>Thêm người khác vào nhóm</strong></p>
+                </div>
+                <div class="modal-body">
+                    <div class="box-search-user-in-group editable"  data-placeholder="Nhập tên một người bạn" contenteditable="true">
+
+                    </div>
+                    <div class="result-search-user">
+                        <div class="user" id = "">
+                            <div class="avatar" >
+                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
+                            </div>
+                            <div class="name" > Đăng Khoa</div>
+                        </div>
+                        <div class="user" id="2">
+                            <div class="avatar" >
+                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
+                            </div>
+                            <div class="name" >Trung Hiếu</div>
+                        </div>
+                        <div class="user" id="3">
+                            <div class="avatar" >
+                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
+                            </div>
+                            <div class="name" >Nhật Minh</div>
+                        </div>
+                        <div class="user" id="4">
+                            <div class="avatar" >
+                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
+                            </div>
+                            <div class="name" >Tuấn Dũng</div>
+                        </div>
+                        <div class="user" id="5">
+                            <div class="avatar" >
+                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
+                            </div>
+                            <div class="name" >Hoàng Anh</div>
+                        </div>
+                        <div class="user">
+                            <div class="avatar" >
+                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
+                            </div>
+                            <div class="name" >Nguyễn Đăng Khoa</div>
+                        </div>
+                        <div class="user">
+                            <div class="avatar" >
+                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
+                            </div>
+                            <div class="name" >Nguyễn Đăng Khoa</div>
+                        </div>
+                        <div class="user">
+                            <div class="avatar" >
+                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
+                            </div>
+                            <div class="name" >Nguyễn Đăng Khoa</div>
+                        </div>
+                        <div class="user">
+                            <div class="avatar" >
+                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
+                            </div>
+                            <div class="name" >Nguyễn Đăng Khoa</div>
+                        </div>
+                        <div class="user">
+                            <div class="avatar" >
+                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
+                            </div>
+                            <div class="name" >Nguyễn Đăng Khoa</div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="btn-click-add-user-to-group"data-dismiss="modal" style="font-weight: bold;color: #0084ff;">Thêm</button>
+                    <button type="button" class="btn btn-default" id="btn-click-hide-modal-add-user-to-group"data-dismiss="modal" style="color: #0084ff;">Hủy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end  modal add user to group-->
+</div>
+</div>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="./asset/bootstrap-3.3.7-dist/js/jquery-3.2.1.js"></script>
+<script src="./asset/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="./javascripts/homechat/js_homechat.js"></script>
+<script src="./javascripts/homechat/client_action_homechat.js"></script>
+<script src="./javascripts/homechat/js_option_group.js"></script>
+</body>
+</html>
+
+

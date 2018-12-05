@@ -1,0 +1,351 @@
+.box-option{
+    position: absolute;
+    top: 25px;
+    left: -245px;
+    width: 300px;
+    height: auto;
+    z-index: 999;
+    background-color: white;
+}
+.show-box-option-group{
+    display: block;
+}
+.hidden-box-option-group{
+    display: none;
+}
+.nav-side-menu {
+    position: relative;
+    overflow: auto;
+    font-family: verdana;
+    font-size: 12px;
+    font-weight: 200;
+    border:1px solid darkgrey;
+    border-radius: 5px;
+    background-color: rgba(64, 40, 40, 0.03);
+    color: rgba(0, 0, 0, 1);
+    z-index: 9999;
+    max-height: 400px;
+    box-shadow:4px 4px #e1e1e1;
+
+}
+
+.nav-side-menu{
+    overflow: scroll;
+}
+.nav-side-menu::-webkit-scrollbar{
+    width: 5px;
+}
+.nav-side-menu::-webkit-scrollbar-thumb{
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 5px;
+}
+
+.nav-side-menu .brand {
+    background-color: rgba(64, 40, 40, 0.03);
+    line-height: 50px;
+    display: block;
+    text-align: center;
+    font-size: 14px;
+}
+.nav-side-menu .toggle-btn {
+    display: none;
+}
+.nav-side-menu ul,
+.nav-side-menu li {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    line-height: 35px;
+    cursor: pointer;
+
+}
+.nav-side-menu ul :not(collapsed) .arrow:before,
+.nav-side-menu li :not(collapsed) .arrow:before {
+    font-family: FontAwesome;
+    content: "\f078";
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    vertical-align: middle;
+    float: right;
+}
+.nav-side-menu ul .active,
+.nav-side-menu li .active {
+    border-left: 3px solid #d19b3d;
+    background-color:rgba(64, 40, 40, 0.03);;
+}
+.nav-side-menu ul .sub-menu li.active,
+.nav-side-menu li .sub-menu li.active {
+    color:rgba(0, 0, 0, 1);
+}
+.nav-side-menu ul .sub-menu li.active a,
+.nav-side-menu li .sub-menu li.active a {
+    color: rgba(0, 0, 0, 1);
+}
+.nav-side-menu ul .sub-menu li,
+.nav-side-menu li .sub-menu li {
+    background-color: white;
+    border: none;
+    line-height: 28px;
+    border-bottom: 1px solid rgba(0, 0, 0, .10);
+    margin-left: 0px;
+    padding-left: 20px;
+}
+.nav-side-menu ul .sub-menu li:hover,
+.nav-side-menu li .sub-menu li:hover {
+    background-color: lightgrey;
+}
+.nav-side-menu ul .sub-menu li:before,
+.nav-side-menu li .sub-menu li:before {
+
+    padding-left: 10px;
+    padding-right: 10px;
+    vertical-align: middle;
+}
+.nav-side-menu li {
+    padding-left: 0px;
+    border-left: 3px solid #2e353d;
+    border-bottom: 1px solid rgba(0, 0, 0, .10);
+}
+.nav-side-menu li a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 1);
+}
+.nav-side-menu li a i {
+    padding-left: 10px;
+    width: 20px;
+    padding-right: 20px;
+}
+.nav-side-menu li:hover {
+    border-left: 3px solid #d19b3d;
+    background-color: #e1e1e8;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}
+@media (max-width: 767px) {
+    .nav-side-menu {
+        position: relative;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .nav-side-menu .toggle-btn {
+        display: block;
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        z-index: 10 !important;
+        padding: 3px;
+        background-color: #ffffff;
+        color: #000;
+        width: 40px;
+        text-align: center;
+    }
+    .brand {
+        text-align: left !important;
+        font-size: 22px;
+        padding-left: 20px;
+        line-height: 50px !important;
+    }
+}
+@media (min-width: 767px) {
+    .nav-side-menu .menu-list .menu-content {
+        display: block;
+    }
+}
+.user-of-group{
+    padding-top:6px;
+    padding-bottom: 6px;
+}
+
+
+/* CSS MODAL CHANGE COLOR BOX CHAT*/
+#modal-change-color{
+    z-index: 10000;
+}
+.modal-dialog{
+    width: 415px;
+    height: auto;
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    padding: 30px;
+}
+.modal {
+     text-align: center;
+ }
+.modal-header{
+    border-bottom: none;
+    margin-bottom: -25px;
+}
+
+@media screen and (min-width: 768px) {
+    .modal:before {
+        display: inline-block;
+        vertical-align: middle;
+        content: " ";
+        height: 100%;
+    }
+}
+.box{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.box1{
+    background-color: rgb(0, 132, 255);
+}
+.box2{
+    background-color: rgb(68, 190, 199);
+}
+
+.box3{
+    background-color: #ffc300;
+}
+
+.box4{
+    background-color: #fa3c4c;
+}
+
+.box5{
+    background-color: #d696bb;
+}
+
+.box6{
+    background-color: #6699cc;
+}
+
+.box7{
+    background-color: #13cf13;
+}
+.box8{
+    background-color: #ff7e29;
+}
+
+.box9{
+    background-color: #e68585;
+}
+
+.box10{
+    background-color: #7646ff;
+}
+
+.box11{
+    background-color: #20cef5;
+}
+.box12{
+    background-color: #67b868;
+}
+
+
+.box13{
+    background-color: #d4a88c;
+}
+.box14{
+    background-color:#ff5ca1;
+}
+
+.box15{
+    background-color:#a695c7;
+}
+/*style box change name member of group*/
+#modal-change-name-member .modal-header{
+    border-bottom: 1px solid #e1e1e1e1;
+    margin-bottom: 0px;
+    font-size: 16px;
+}
+#modal-change-name-member .modal-body{
+    clear: both;
+    padding: 0px;
+}
+#modal-change-name-member .modal-body .list-member{
+    max-height: 200px;
+    overflow: scroll;
+}
+
+#modal-change-name-member .modal-body .list-member::-webkit-scrollbar{
+    width: 5px;
+}
+#modal-change-name-member .modal-body .list-member::-webkit-scrollbar-thumb{
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+.member {
+    height: 50px;
+    line-height: 50px;
+    cursor: pointer;
+}
+.member .avatar-member{
+    width: 20%;
+    float:left;
+    padding-left: 10px
+}
+.member .avatar-member img{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.member .name-member{
+    width: 75%;
+    float:left;
+}
+.member:hover{
+    background-color: #e1e1e1;
+}
+/* sub modal change  name member*/
+#sub-modal-change-name-member .modal-dialog{
+    width: 470px;
+}
+
+/*modal add user  to group*/
+#modal-add-user-to-group .modal-body .result-search-user{
+    max-height: 250px;
+    overflow: scroll;
+    margin-top: 10px;
+}
+#modal-add-user-to-group .modal-body .result-search-user::-webkit-scrollbar{
+    width: 5px;
+}
+#modal-add-user-to-group .modal-body .result-search-user::-webkit-scrollbar-thumb{
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+#modal-add-user-to-group .modal-body .result-search-user .user{
+    height: 50px;
+    line-height: 45px;
+    clear: both;
+    cursor: pointer;
+}
+#modal-add-user-to-group .modal-body .box-search-user-in-group{
+    width: 100%;
+    height: 45px;
+    line-height: 43px;
+    border:1px solid lightgrey;
+    border-radius: 20px;
+}
+#modal-add-user-to-group .modal-body .result-search-user .user:hover{
+    background-color: #e1e1e8;
+}
+#modal-add-user-to-group .modal-body .result-search-user .user .avatar{
+    width:15%;
+    text-align: center;
+    display: inline-block;
+}
+#modal-add-user-to-group .modal-body .result-search-user .user .avatar img{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+#modal-add-user-to-group .modal-body .result-search-user .user .name{
+    width: 60%;
+    display: inline-block;
+
+}
