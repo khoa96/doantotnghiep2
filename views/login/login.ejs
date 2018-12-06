@@ -85,6 +85,7 @@
 <!--        THÔNG BÁO ĐĂNG NHẬP - ĐĂNG KÍ -->
 	  <div class="notification">
 <!--            nơi dành cho thông báo-->
+          
 		  <!-- SLIDER -->
 		  <div class="content">
 			  <!-- LOGO -->
@@ -142,15 +143,14 @@
 				  </div>
 				  <!-- TABS CONTENT SIGNUP -->
 				  <div id="signup-tab-content">
-					  <form class="signup-form" action="register" method="post" enctype="multipart/form-data" style="margin-top: 10px">
-
-						  <input type="email" class="input" id="user_email" name="user_email" autocomplete="off" placeholder="Email" style="color: black;" value="" required />
-						  <input type="text" class="input" id="user_name" name="user_name" placeholder="Username" style="color: black" value="" required>
-						  <input type="password" class="input" id="user_pass" name="user_pass" autocomplete="off" placeholder="Password" style="color: black; margin-bottom: 30px" value="" required/>
-						  <label for="avatar">Profile picture:</label>
-						  <input type="file" id="avatar" name="avatar" accept="image/png,image/jpeg" required/>
-						  <button type="submit" class="btn btn-login" style="background-color: #5bcfbe;color: white;margin-top: 20px; width: 300px" >ĐĂNG KÍ</button>
-					  </form>
+				  <form action="test" method="post" enctype="multipart/form-data">
+					<input type="email" class="input" id="user_email" name="user_email"  placeholder="Email address" style="color:black" autocomplete="off">
+					<input type="text" class="input" id="user_username" name="user_username" placeholder="Username" style="color:black" autocomplete="off">
+					<input type="password" class="input" id="user_password" name="user_password" placeholder="Password" style="color:black;margin-bottom: 20px" autocomplete="off">
+					<label for="avatar">Profile picture:</label>
+					<input type="file"  name="image" id="image">
+					<button type="submit" class="btn btn-login" style="background-color: #5bcfbe;color: white;margin-top: 20px; width: 300px" >ĐĂNG KÍ</button>
+				</form>
 					  <div class="help-action">
 						  <p>
 							<span class="glyphicon glyphicon-question-sign"  style="font-size: 18px"></span>
@@ -163,7 +163,7 @@
 	  </div>
   </div>
 </div>
-	  
+
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="./asset/bootstrap-3.3.7-dist/js/jquery-3.2.1.js"></script>

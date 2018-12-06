@@ -9,6 +9,19 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+const mongoose = require('mongoose');
+const db = "mongodb://abc:khoanguyen96@ds143532.mlab.com:43532/node_mongoose";
+mongoose.Promise = require('bluebird');
+
+/*CONNECT  to monngoose  */
+mongoose.connect(db, {useNewUrlParser: true}, err => {
+  if(err) {
+    console.log('ERROR!' + err);
+  }else {
+    console.log('connnected');
+  }
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
