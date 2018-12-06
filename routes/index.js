@@ -1,6 +1,7 @@
 var express = require('express');
 const fs = require('fs');
 const Image = require('../models/image');
+const User = require('../models/user');
 const path = require('path');
 var router = express.Router();
 var multer  = require('multer');
@@ -17,27 +18,13 @@ var storage = multer.diskStorage({
 const upload = multer({storage: storage}).single("image");
 
 router.get('/', (req, res) => {
-    res.render('login/login');
+    res.render('login/login', {message: ''});
 });
 
-
-router.get('/profile', (req, res) => {
-    res.render('profile/profile');
-});
-router.get('/upload', (req, res) => {
-    Image.find({}, (err, images) => {
-        if(err) {
-            res.send(err);
-        } else {
-           res.render('profile/profile', {images: images});
-        }
-    })
-});
-
-router.post('/test', (req, res) => {
-    const email = req.body.user_email;
-    const username = req.body.user_username;
-    const password = req.body.user_password;
+/*POST user to server */
+router.post('/singup', (req, res) => {
+   
+   
     upload(req, res, function (err) {
         // need to check if the req.file is set.
         if(req.file == null || req.file == undefined || req.file == ""){
@@ -47,42 +34,34 @@ router.post('/test', (req, res) => {
         }else{
             // An error occurred when uploading
             if (err) {
-                console.log(err);
+                res.render('login/login', {message: "Lỗi khi upload ảnh, vui lòng thực hiện lại"});
             }else{
-                // Everything went fine
-                //define what to do with the params
-                //both the req.body and req.file(s) are accessble here
+                if(req.file.size > 1*1024*1024 ){
+                res.render('login/login', {message: 'Kích thước ảnh không được vượt quá 5M'});
+            }else {
                 console.log(req.file);
-        
-        
-                //store the file name to mongodb    
-                //we use the model to store the file.
-                let image = new Image();
-                image.image = req.file.filename;
-        
-                
-        
-                //save the image
-                image.save(()=>{
-                    if(err){
-                        console.log(err);
-                    }else{
-                        res.redirect('/upload');
-                    }
-                });
+                let email = req.body.user_email;
+                let username = req.body.user_username;
+                let password = req.body.user_password;
+                let user = new User ();
+                user.username = username;
+                user.email = email;
+                user.password = password;
+                user.avatar  = req.file.filename;
 
+               user.save((err, user) => {
+                   if(err) {
+                      res.render('login/login', {message: 'Địa chỉ email đã tồn tại. Xin vui lòng thử lại'});
+                   } else {
+                      res.render('login/login', {message: 'success'});
+                   }
+               })
             }
-    
+            
+         }
+        
         }
-
     }); 
-
-  
 });
 
-
-/**GET homechat page */
-router.get('/homechat', (req, res) => {
-     res.render('homechat/homechat');
-});
 module.exports = router;
