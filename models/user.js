@@ -21,18 +21,26 @@ const userSchema = new Schema({
 	  avatar: {
 		  type: String,
 		  require: true
-	  }
+		},
+		state: {
+			type: String,
+			default: 'off'
+		}
 })
 //authenticate input against database
-// tao hai phuong thuc cho passport
-// 1. ma hoa mat khau.(ham truyen vao mat khau)
-userSchema.methods.generateHash = function(password) {
-	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-};
-
-// kiểm tra mật khẩu có trùng khớp
-userSchema.methods.validPassword = function(password) {
-	return bcrypt.compareSync(password, this.password);
-};
-
-module.exports = mongoose.model('User', userSchema, 'users');
+userSchema.statics.authenticate = function (email, password, callback) {
+  User.findOne({ email: email, password: password })
+    .exec(function (err, user) {
+      if (err) {
+        return callback(err)
+      } else if (!user) {
+        var err = new Error('User not found.');
+        err.status = 401;
+        return callback(err);
+      } else {
+				return callback(null, user)
+			}
+    });
+}
+var User = mongoose.model('User', userSchema);
+module.exports = User;

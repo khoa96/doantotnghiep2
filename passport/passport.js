@@ -1,7 +1,9 @@
 const LocalStrategy   = require('passport-local').Strategy;
+const socket_io = require('socket.io');
+const io = socket_io();
 const User = require('../models/user');
 
-module.exports = function(passport) {
+module.exports = function(passport, io) {
     // luu 1 user vao ben trong session.( luu user_id)
 	passport.serializeUser(function(user, done) {
 		 done(null, user._id);
@@ -11,8 +13,9 @@ module.exports = function(passport) {
 	 // tu thong tin da luu vao trong user. se tim va gan cai gi vao req.user: ==> de su dung ve sau nay.
 	 passport.deserializeUser(function(_id, done) {
 		 User.findById(_id, function(err, user) {
+			
 			 done(err, user);
-			 console.log(user);
+	
 		 });
 	 });
 	

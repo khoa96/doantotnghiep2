@@ -29,12 +29,12 @@
                 <div class="row heading">
                     <div class="col-sm-2 col-xs-3 heading-avatar" >
                         <div class="heading-avatar-icon" style="position: relative;;" id="">
-                            <img src="./images/avatar6.png">
+                            <img src="./uploads/<%= user.avatar %> ">
                             <span style="display: block; width: 15px; height: 15px; background-color: green;border-radius: 50%;position: absolute;bottom: 0;right: 38px;"></span>
                         </div>
                     </div>
-                    <div class="col-sm-3 col-xs-3 heading-username" style="padding:0;">
-                        <p style="font-size: 14px;margin-top: 20px;font-weight: bold">username </p>
+                    <div class="col-sm-5 col-xs-3 heading-username" style="padding:0;">
+                        <p style="font-size: 14px;margin-top: 20px;font-weight: bold; display: block; overflow:hidden; text-overflow: ellipsis; white-space: nowrap"><%= user.username %>   </p>
                     </div>
                     <div class="col-sm-1 col-xs-2  heading-compose  pull-right" id="btn-click-logout">
                         <a href="logout">
@@ -424,9 +424,11 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="./asset/bootstrap-3.3.7-dist/js/jquery-3.2.1.js"></script>
 <script src="./asset/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<script src="./javascripts/homechat/js_homechat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
 <script src="./javascripts/homechat/client_action_homechat.js"></script>
-<script src="./javascripts/homechat/js_option_group.js"></script>
+<script src="./javascripts/homechat/js_homechat.js"></script>
+<script src="./javascripts/homechat/test.js"></script>
+
 </body>
 </html>
 

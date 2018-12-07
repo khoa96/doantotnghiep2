@@ -26,29 +26,48 @@ router.get('/', function(req, res) {
         message: '',
         status:''
     }
-    console.log(user);
     res.render('login/login', {loginMessage: loginMessage})
 });
 
-router.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/homechat',
-    failureRedirect : '/', 
-    failureFlash : true
-}));
+// post login va kiem tra authencation. khi thanh cong se luu vao trong session.
+router.post('/login', (req, res) => {
+   const email = req.body.user_login_email;
+   const password = req.body.user_login_pass;
+   if(email &&  password) {
+        User.authenticate(email, password, function (error, user) {
+            if (error || !user) {
+                const loginMessage = {
+                    user: '',
+                    message : 'Địa chỉ email hoặc mật khẩu không đúng. Xin kiểm tra lại',
+                    status: 'false'
+                }
+                res.render('login.login', {loginMessage: loginMessage});
+            } else { 
+                req.session.userId = user._id;
+                return res.redirect('/homechat');
+            }
+        });
+   }
+});
 
 /*GET homechatpasge */
 // phai dang nhap thanh cong moi dc chuyen sang trang nay.
-router.get('/homechat', isLoggedIn, function(req, res) {
-
-    res.render('homechat/homechat')
+router.get('/homechat', function(req, res) {
+    // truoc khi vao homechat ==> phai dang nhap => kiem tra session.
+    User.findById(req.session.userId)
+    .exec(function (error, user) {
+      if (error) {
+        return next(error);
+      } else {
+        if (user === null) {
+           res.redirect('/');
+        } else {
+          res.render('homechat/homechat', {user: user});
+        }
+      }
+    });
 });
 
-// Hàm được sử dụng để kiểm tra đã login hay chưa
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated())
-        return next();
-    res.redirect('/');
-}
 /*POST user to server */
 router.post('/singup', (req, res) => {
     upload(req, res, function (err) {
@@ -74,7 +93,7 @@ router.post('/singup', (req, res) => {
                         status: 'false'
                     }
                 res.render('login/login', {loginMessage: loginMessage});
-            }else {
+            } else {
                
                 let email = req.body.user_email;
                 let username = req.body.user_username;
@@ -84,7 +103,7 @@ router.post('/singup', (req, res) => {
                 user_singup.email = email;
                 user_singup.password = password;
                 user_singup.avatar  = req.file.filename;
-
+                
                user_singup.save((err, user) => {
                    if(err) {
                     const loginMessage = {
@@ -92,14 +111,17 @@ router.post('/singup', (req, res) => {
                         message: 'Địa chỉ email đã tồn tại. Xin vui lòng thử lại',
                         status: 'false'
                     }
+                    console.log(err);
                     res.render('login/login', {loginMessage: loginMessage});
 
                    } else {
                     const loginMessage = {
-                        user_singup: '',
+                        user: user,
                         message: 'Đăng kí tài khoản thành công. Xin mời tiếp tục',
                         status: 'success'
                     }
+                     // luu id user vao trong session 
+                     req.session.userId = user._id;
                       res.render('login/login', {loginMessage: loginMessage});
                    }
                })
@@ -110,10 +132,24 @@ router.post('/singup', (req, res) => {
     }); 
 });
 
-
 // test get session 
 router.get('/get-session', (req, res) => {
-   res.send(req.user);
+   res.send(req.session.userId);
 });
+
+// logout 
+// GET for logout logout
+router.get('/logout', function (req, res, next) {
+    if (req.session) {
+      // delete session object
+      req.session.destroy(function (err) {
+        if (err) {
+          return next(err);
+        } else {
+          return res.redirect('/');
+        }
+      });
+    }
+  });
 
 module.exports = router;

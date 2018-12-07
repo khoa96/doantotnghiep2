@@ -8,7 +8,7 @@ var logger = require('morgan');
 var multer  = require('multer');
 const passport = require('passport');
 const flash = require('connect-flash');
-
+const socket_io = require('socket.io');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -26,8 +26,12 @@ mongoose.connect(db, {useNewUrlParser: true}, err => {
     console.log('connnected');
   }
 });
-// cau hinh session: 
+//socket
+var io = socket_io();
+app.io = io;
 
+
+// cau hinh session
 app.use(session({
   secret: 'this-is-a-secret-token', 
   cookie: { maxAge: 1*30*24*60*60*1000 },
@@ -53,7 +57,8 @@ app.use(flash());
 app.use('/', indexRouter);
 app.use('/auth', usersRouter);
 
-
+//required socsket 
+require('./socket/socket_login');
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -69,7 +74,7 @@ app.use(function (req, res) {
   res.write('you posted:\n')
   res.end(JSON.stringify(req.body, null, 2))
 })
-
+require('./socket/socket_login')(io);
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
