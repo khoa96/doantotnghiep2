@@ -27,7 +27,7 @@
 	</style>
   </head>
   <body> 
-	  <% if (message == 'success') { %>
+	  <% if (loginMessage.status == 'success') { %>
 		<div class="row">
 			<div class="container" style="margin-left: 300px;margin-top:10px">
 					<div class="col-xs-12 col-sm-8 col-md-8 col-md-offset-2">
@@ -36,14 +36,14 @@
 								<span aria-hidden="true">&times;</span>
 								<span class="sr-only">Close</span>
 							</button>
-							<strong>Success!</strong> Đăng kí tài khoản thành công. Xin mời tiếp tục.
+							<strong>Success!</strong> <%= loginMessage.message %> 
 						</div>
 							
 					</div>
 			</div>
 		</div>
-	  <% } %>
-	  <% if (message != '' && message != 'success') { %>
+	  <% }  %>
+	  <% if (loginMessage.status == 'false') { %>
 	  <div class="row">
 		  <div class="container" style="margin-left: 300px;margin-top:10px">
 				  <div class="col-xs-12 col-sm-8 col-md-8 col-md-offset-2">
@@ -52,7 +52,7 @@
 							  <span aria-hidden="true">&times;</span>
 							  <span class="sr-only">Close</span>
 						  </button>
-						  <strong>Error!</strong> <%= message %> 
+						  <strong>Error!</strong> <%= loginMessage.message %> 
 					  </div>
 						  
 				  </div>
@@ -167,9 +167,13 @@
 								  id="user_email_login"
 								  autocomplete="off"  
 								  name="user_login_email"  
-								  value="" 
 								  placeholder="Email address" 
-								  style='color: black;' required/>
+								  style='color: black;'
+								   required
+								  <% if (loginMessage.user) { %>
+								  value='<%= loginMessage.user.email %>'
+								  <% } %>
+							  />
 
 							<input 
 								  type="password" 
@@ -177,9 +181,14 @@
 								  id="user_pass_login" 
 								  autocomplete="off" 
 								   name="user_login_pass"
-									value="" 
-									placeholder="Password" 
-									style="color: black" required/>
+								   placeholder="Password" 
+								   style="color: black" 
+								   required
+								   required
+								   <% if (loginMessage.user) { %>
+								   value='<%= loginMessage.user.password %>'
+								   <% } %>
+								  />
 
 							<input type="checkbox" class="checkbox" name ="remember" checked id="remember_me">
 							<label for="remember_me">Remember me</label>
@@ -198,7 +207,11 @@
 						   placeholder="Email address" 
 						   style="color:black" 
 						   autocomplete="off" 
-						   required>
+						   required
+						   <% if (loginMessage.user_singup) { %>
+								value='<%= loginMessage.user_singup.email %>'
+						    <% } %>
+						   >
 						<input 
 						   type="text" 
 						   class="input" 
@@ -206,9 +219,12 @@
 						   name="user_username" 
 						   placeholder="Username" 
 						   style="color:black" 
-						   value=""
 						   autocomplete="off" 
-						   required>
+						   required
+						   <% if (loginMessage.user_singup) { %>
+							  value='<%= loginMessage.user_singup.username %>'
+							<% } %>
+						/>
 						<input 
 						  type="password"
 						   class="input" 
@@ -217,9 +233,21 @@
 						   placeholder="Password"  
 						   autocomplete="off" 
 						   style="color: black; margin-bottom:30px"  
-						   required>
+						   required
+						   <% if (loginMessage.user_singup) { %>
+								value='<%= loginMessage.user_singup.password %>'
+							<% } %>
+						/>
 						<label for="avatar">Profile picture:</label>
-						<input type="file"  name="image" id="image" required>
+						<input 
+							type="file"  
+							name="image" 
+							id="image"
+							required
+							<% if (loginMessage.user_singup) { %>
+								value='<%= loginMessage.user_singup.avatar %>'
+							<% } %>
+						/>
 						<button type="submit" class="btn btn-login" style="background-color: #5bcfbe;color: white;margin-top: 20px; width: 300px" >ĐĂNG KÍ</button>
 					</form>
 						<div class="help-action">

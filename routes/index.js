@@ -19,7 +19,15 @@ var storage = multer.diskStorage({
 const upload = multer({storage: storage}).single("image");
 
 router.get('/', function(req, res) {
-    res.render('login/login', {message: ''})
+    // truy van trong session lay thong tin user neu user da dang ki.
+    let user = (req.user == null || req.user == undefined || req.user == "") ? null : req.user;
+    const loginMessage = {
+        user: user,
+        message: '',
+        status:''
+    }
+    console.log(user);
+    res.render('login/login', {loginMessage: loginMessage})
 });
 
 router.post('/login', passport.authenticate('local-login', {
@@ -31,6 +39,7 @@ router.post('/login', passport.authenticate('local-login', {
 /*GET homechatpasge */
 // phai dang nhap thanh cong moi dc chuyen sang trang nay.
 router.get('/homechat', isLoggedIn, function(req, res) {
+
     res.render('homechat/homechat')
 });
 
@@ -51,30 +60,50 @@ router.post('/singup', (req, res) => {
         }else{
             // An error occurred when uploading
             if (err) {
-                res.render('login/login', {message: "Lỗi khi upload ảnh, vui lòng thực hiện lại"});
+                const loginMessage = {
+                    user: '',
+                    message: 'Lỗi khi upload ảnh, vui lòng thực hiện lại',
+                    status: 'false'
+                }
+                res.render('login/login', {loginMessage: loginMessage});
             }else{
                 if(req.file.size > 1*1024*1024 ){
-                res.render('login/login', {message: 'Kích thước ảnh không được vượt quá 5M'});
+                    const loginMessage = {
+                        user: '',
+                        message: 'Kích thước ảnh không được vượt quá 5M',
+                        status: 'false'
+                    }
+                res.render('login/login', {loginMessage: loginMessage});
             }else {
-                console.log(req.file);
+               
                 let email = req.body.user_email;
                 let username = req.body.user_username;
                 let password = req.body.user_password;
-                let user = new User ();
-                user.username = username;
-                user.email = email;
-                user.password = user.generateHash(password);
-                user.avatar  = req.file.filename;
+                let user_singup = new User ();
+                user_singup.username = username;
+                user_singup.email = email;
+                user_singup.password = password;
+                user_singup.avatar  = req.file.filename;
 
-               user.save((err, user) => {
+               user_singup.save((err, user) => {
                    if(err) {
-                      res.render('login/login', {message: 'Địa chỉ email đã tồn tại. Xin vui lòng thử lại'});
+                    const loginMessage = {
+                        user_singup: user_singup,
+                        message: 'Địa chỉ email đã tồn tại. Xin vui lòng thử lại',
+                        status: 'false'
+                    }
+                    res.render('login/login', {loginMessage: loginMessage});
+
                    } else {
-                      res.render('login/login', {message: 'success'});
+                    const loginMessage = {
+                        user_singup: '',
+                        message: 'Đăng kí tài khoản thành công. Xin mời tiếp tục',
+                        status: 'success'
+                    }
+                      res.render('login/login', {loginMessage: loginMessage});
                    }
                })
             }
-            
          }
         
         }

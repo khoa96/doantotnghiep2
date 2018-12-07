@@ -36,7 +36,7 @@ module.exports = function(passport) {
 				 return done(null, false, req.flash('loginMessage', 'Không tìm thấy user')); // req.flash is the way to set flashdata using connect-flash
  
 			 // if the user is found but the password is wrong
-			 if (!user.validPassword(password))
+			 if (user.password != password)
 				 return done(null, false, req.flash('loginMessage', 'Email hoặc mật khẩu không hợp lệ')); // create the loginMessage and save it to session as flashdata
  
 			 // all is well, return successful user
