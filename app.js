@@ -29,21 +29,24 @@ mongoose.connect(db, {useNewUrlParser: true}, err => {
 //socket
 var io = socket_io();
 app.io = io;
+var arrUser = [];
 
-
-// cau hinh session
-app.use(session({
-  secret: 'this-is-a-secret-token', 
-  cookie: { maxAge: 1*30*24*60*60*1000 },
-  saveUninitialized: true,
-  resave: true
-}))
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-// passport
-require('./passport/passport')(passport);
+
+// cau hinh session
+app.use(session({
+  //..previous removed for brevity
+  secret: 'secret',
+  saveUninitialized: true,
+  resave: false,
+   cookie: {
+     
+       maxAge:  12*30*24*60*60*1000
+   }
+}));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -58,7 +61,11 @@ app.use('/', indexRouter);
 app.use('/auth', usersRouter);
 
 //required socsket 
-require('./socket/socket_login');
+require('./socket/socket_init')(io, arrUser);
+require('./socket/socket_login')(io);
+require('./socket/socket_logout')(io);
+require('./socket/socket_chat')(io, arrUser);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -74,7 +81,6 @@ app.use(function (req, res) {
   res.write('you posted:\n')
   res.end(JSON.stringify(req.body, null, 2))
 })
-require('./socket/socket_login')(io);
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="./stylesheets/homechat/style_homechat.css">
     <link rel="stylesheet" href="./stylesheets/homechat/style_option_group_chat.css">
     <link rel="stylesheet" href="./stylesheets/homechat/style_search_message.css">
+   
     <title>ChatWork</title>
 
 </head>
@@ -28,13 +29,13 @@
             <div class="side-one">
                 <div class="row heading">
                     <div class="col-sm-2 col-xs-3 heading-avatar" >
-                        <div class="heading-avatar-icon" style="position: relative;;" id="">
-                            <img src="./uploads/<%= user.avatar %> ">
+                        <div class="heading-avatar-icon" style="position: relative;;" id="<%= homechatInfo.user._id  %>">
+                            <img src="./uploads/<%= homechatInfo.user.avatar %> ">
                             <span style="display: block; width: 15px; height: 15px; background-color: green;border-radius: 50%;position: absolute;bottom: 0;right: 38px;"></span>
                         </div>
                     </div>
                     <div class="col-sm-5 col-xs-3 heading-username" style="padding:0;">
-                        <p style="font-size: 14px;margin-top: 20px;font-weight: bold; display: block; overflow:hidden; text-overflow: ellipsis; white-space: nowrap"><%= user.username %>   </p>
+                        <p style="font-size: 14px;margin-top: 20px;font-weight: bold; display: block; overflow:hidden; text-overflow: ellipsis; white-space: nowrap"><%= homechatInfo.user.username %>   </p>
                     </div>
                     <div class="col-sm-1 col-xs-2  heading-compose  pull-right" id="btn-click-logout">
                         <a href="logout">
@@ -185,43 +186,27 @@
                 <p style="margin-top: 10px"><strong>DANH SÁCH USER ONLINE</strong></p>
             </div>
             <div class="row message list-user-online">
-                
-                <div class="row user-chat-body" id="">
-                    <div class="col-sm-3 col-xs-3 user-chat-avatar">
-                        <div class="user-chat-avatar-icon">
-                            <img src="./images/avatar6.png">
-                        </div>
-                    </div>
-                    <div class="col-sm-9 col-xs-9 user-chat-main">
-                        <div class="row">
-                            <div class="col-sm-8 col-xs-8 user-chat-name">
-                                <span class="user-chat-name-meta">username online</span>
-                            </div>
-                            <div class="col-sm-4 col-xs-4 pull-right ">
-                                <span class="time-meta pull-right "><span class="user-state"></span></span>
+                <!-- load all user online from server-->
+                <% homechatInfo.user_onlines.forEach(user_online => { %>
+                    <div class="row user-chat-body" id="<%= user_online._id %>">
+                        <div class="col-sm-3 col-xs-3 user-chat-avatar">
+                            <div class="user-chat-avatar-icon">
+                                <img src="./uploads/<%= user_online.avatar %> ">
                             </div>
                         </div>
+                        <div class="col-sm-9 col-xs-9 user-chat-main">
+                            <div class="row">
+                                <div class="col-sm-8 col-xs-8 user-chat-name">
+                                    <span class="user-chat-name-meta"><%= user_online.username %> </span>
+                                </div>
+                                <div class="col-sm-4 col-xs-4 pull-right ">
+                                    <span class="time-meta pull-right "><span class="user-state"></span></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-								</div>
-								<div class="row user-chat-body" id="">
-								<div class="col-sm-3 col-xs-3 user-chat-avatar">
-										<div class="user-chat-avatar-icon">
-												<img src="./images/avatar6.png">
-										</div>
-								</div>
-								<div class="col-sm-9 col-xs-9 user-chat-main">
-										<div class="row">
-												<div class="col-sm-8 col-xs-8 user-chat-name">
-														<span class="user-chat-name-meta">username online</span>
-												</div>
-												<div class="col-sm-4 col-xs-4 pull-right ">
-														<span class="time-meta pull-right "><span class="user-state"></span></span>
-												</div>
-									 	</div>
-								  </div>
-						   </div>
-             
-
+                    
+                <% }) %>
             </div>
             <div class="row reply" style="background-color: white" >
                 <div class="col-sm-12 searchBox-inner" style="margin-top: -8px">
@@ -424,11 +409,13 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="./asset/bootstrap-3.3.7-dist/js/jquery-3.2.1.js"></script>
 <script src="./asset/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
-<script src="./javascripts/homechat/client_action_homechat.js"></script>
-<script src="./javascripts/homechat/js_homechat.js"></script>
-<script src="./javascripts/homechat/test.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>  
+<script src="./javascripts/homechat/socket.js"></script>
+<script src="./javascripts/homechat/client_init.js"></script>
+<script src="./javascripts/homechat/client_get_list_useronline.js"></script>
+<script src="./javascripts/homechat/client_logout.js"></script>
+<script src="./javascripts/homechat/action/chat_group.js"></script>
+<script src="./javascripts/homechat/client_chat_group.js"></script>
 </body>
 </html>
 
