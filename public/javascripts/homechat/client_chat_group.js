@@ -49,7 +49,7 @@ $(document).ready(function () {
    socket.on ('server-broadcast-group-chat-to-client',function (data) {
     var groupName = data.name;
     var groupId = data._id;
-    var group = ' <div class="row sideBar-body" data-group-id="'+groupId+'" >';
+    var group = ' <div class="row sideBar-body" id="'+groupId+'" >';
     group += ' <div class="col-sm-3 col-xs-3 sideBar-avatar"> ';
     group += ' <div class="avatar-icon">';
     group += ' <img src="./images/group1.png">';
@@ -59,7 +59,7 @@ $(document).ready(function () {
     group += ' <div class="row"> ';
     group += ' <div class="col-sm-8 col-xs-8 sideBar-name">';
     group += ' <p class="name-meta" ><strong>'+groupName+'</strong></p>';
-    group += ' <p class="message-history"></p>';
+    group += ' <p class="message-history">nguyen dang khoa hoc vien cong nghe buu chinh vien thong</p>';
     group += ' </div>';
     group += ' <div class="col-sm-4 col-xs-4 pull-right sideBar-time"> ';
     group += ' <span class="time-meta pull-right">11:23</span>';
@@ -70,7 +70,14 @@ $(document).ready(function () {
 
     $(".list-message-history").prepend(group);
 
-});
+  }); 
+
+   // 3. lang nghe su kien bao loi khi them phong
+   socket.on('server-send-error-create-room-to-client', function(data) {
+	   var room_id = data._id;
+	   var room = $(".list-message-history").find('#'+ room_id);
+	   $(".list-message-history").prepend(room);
+   })
 
 
 	// chat group ( bao gom ca chat hai nguoi va chat nhieu hon 2 nguoi.)

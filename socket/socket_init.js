@@ -12,7 +12,21 @@ module.exports = function(io, arrUser) {
                 id_send  : data
             }
             arrUser.push(user);
+            console.log(arrUser);
+            console.log('so socket co trong server: ' + arrUser.length)
+        });
+        
+        // khi huy 1 socket ==> xoa socket trong mang arrUser
+        socket.on('disconnect',function(){
+            for(let i = 0; i < arrUser.length; i++) {
+                if(arrUser[i].id_send == socket.id_send){
+                    arrUser.splice(i,1);
+                    break;
+                }
+            }
+            console.log('so socket con lai = ' + arrUser.length);
         });
     });
+
     return router;
 }

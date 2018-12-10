@@ -26,26 +26,40 @@ module.exports = function(io, arrUser) {
 		   const room = new Room({
 			   name: groupName,
 			   members: arrUserId
-		   });
-		 room.save((err, room) => {
-			   if(err) {
-				   console.log(err);
-			   } else {
-				   // lay toan bo thong tin cua cac thanh vien trong nhom
-				//    Room.findById({_id: group._id}).populate('members').exec((err, results) => {
-				// 	   if(err) {
-				// 		   console.log(err);
-				// 	   } else {
-				// 		   console.log(results);
-				// 	   }
-				//    })
-				
-				// emit thong tin create nhom den tat ca cac thanh vien trong nhom.
-				
+			});
 			
-			   }
-		})
-
+			// neu room chat da ton tai thi ko them.
+			Room.findOne({name: groupName}, (err, result) => {
+				if(err) {
+					console.log(err);
+				} else {
+					if(result != null || result != undefined) {
+					
+						socket.emit('server-send-error-create-room-to-client', result);
+					} else {
+						room.save((err, room) => {
+							if(err) {
+								console.log(err);
+							} else {
+								// lay toan bo thong tin cua cac thanh vien trong nhom
+							//    Room.findById({_id: group._id}).populate('members').exec((err, results) => {
+							// 	   if(err) {
+							// 		   console.log(err);
+							// 	   } else {
+							// 		   console.log(results);
+							// 	   }
+							//    })
+							
+							// emit thong tin create nhom den tat ca cac thanh vien trong nhom.
+							socket.emit('server-broadcast-group-chat-to-client', room);
+							arrUser.forEach(user => {
+								socket.to(user.socket_id).emit('server-broadcast-group-chat-to-client', room);
+							});
+							}
+					   })
+					}
+				}
+			})
 	   })
       
     });
