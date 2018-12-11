@@ -65,7 +65,8 @@ require('./socket/socket_init')(io, arrUser);
 require('./socket/socket_login')(io);
 require('./socket/socket_logout')(io);
 require('./socket/socket_create_group')(io, arrUser);
-require('./socket/socket_chat')(io)
+require('./socket/socket_typing')(io);
+require('./socket/socket_chat')(io);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

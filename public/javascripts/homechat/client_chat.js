@@ -147,6 +147,52 @@ $(document).ready(function () {
 	}
 	
   })
+  // lang nghe server tra ve tin nhan cua nhom
+  socket.on('server-send-group-message-history-to-client',function(data){
+    // code load message history of group chat.
+    var message_history = data;
+    var id_send = $(".side .side-one .heading .heading-avatar .heading-avatar-icon").attr('id');
+    for(var i = 0; i < message_history.length; i++){
+        
+        if(message_history[i].creator== id_send){
+            // tin nhắn của chính user
+            var message  = ' <div class="row message-body"> ';
+            message += ' <div class="col-sm-12 message-main-sender"> ';
+            message += ' <div class="sender"> ';
+            message += ' <div class="message-text">'+ message_history[i].body +' </div>';
+            message += ' <span class="message-time pull-right">'+ formatDate(new Date(message_history[i].time))+'</span> ';
+            message += ' </div> ';
+            message += ' </div> ';
+            message += ' </div> ';
+            $(".list-message").append(message);
+
+        }else{
+            // ko phải tin nhắn của user.
+            var message = ' <div class="row message-body"> ';
+            message += ' <div class="col-sm-12 message-main-receiver"> ';
+            message += ' <div class="left" style="width: 10%;float: left;margin-top: 10px"> ';
+            message += '  <img src="" style="display: block;with:40px;height: 40px;border-radius: 50%;margin-top: 15px" data-toggle="tooltip" data-placement="top" title="'+data.username_recipient+'"> ';
+            message += ' </div>';
+            message += ' <div class="right" style="width: 90%;float: left;">';
+            message += ' <div class="receiver">';
+            message += ' <div class="message-text" >'+message_history[i].body+'</div> ';
+            message += ' <span class="message-time pull-right">'+formatDate(new Date(message_history[i].time))+'</span>';
+           
+            message += ' </div> ';
+            message += ' </div> ';
+            message += ' </div> ';
+            message += ' </div> ';
+            $('.list-message').append(message);
+        }
+    }
+    $("#conversation").animate({
+        scrollTop : $('#conversation').get(0).scrollHeight
+    });
+
+});
+
+
+
 	//Buoc I: click vao 1 cuoc tro chuyen.
 	$(document).on('click','.list-message-history .sideBar-body', function (){
       
@@ -164,18 +210,14 @@ $(document).ready(function () {
         // buoc3 :. change main box chat equals null
 			$(".list-message").html("");
 		
-		// buoc4 : emit len server. neu da nam trong 1 room thi se roi khoi. neu khong se them vao room nay.
+		 // buoc4 : emit len server. neu da nam trong 1 room thi se roi khoi. neu khong se them vao room nay.
             socket.emit('create-room', roomId);
-
-            // // c. load lai lịch sủ tin nhắn của nhóm chat.
-            // socket.emit('client-request-get-group-message-history-to-server',{id_send:id_send, group_id : group_id});
+		  
+	    // buoc5: load lai lịch sủ tin nhắn của nhóm chat.
+            socket.emit('client-request-get-group-message-history-to-server', roomId);
 
             // // d. load  change option group
             // socket.emit('client-request-get-option-group-to-serve',{group_id : group_id});
-
-            // // e. create group chat
-            // var room_name = $(this).data('name-room');
-			// socket.emit('creat-room',room_name)
         
 	});
 	

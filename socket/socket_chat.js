@@ -16,6 +16,18 @@ module.exports = function(io) {
             socket.join(data.group);
             socket.room = data.group;
         })
+
+        // server lang nghe yeu cau load lai tin nhan tu phia client cua room chat.
+        socket.on('client-request-get-group-message-history-to-server', (data) => {
+            console.log(data);
+            Message.find({group: data}, (err, messages) => {
+                if(err) {
+                    console.log(err);
+                } else {
+                    socket.emit('server-send-group-message-history-to-client', messages);
+                }
+            })
+        })
        // server lang nghe su co tin nhan gui len
        socket.on('client-send-group-message-to-server', (data) => {
            let message = new Message({
@@ -29,7 +41,6 @@ module.exports = function(io) {
                if(err) {
                    console.log(err);
                } else {
-                   console.log(result);
                  io.sockets.in(socket.room).emit("server-broadcast-message-to-room",data);
                }
            })
