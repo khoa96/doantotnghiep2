@@ -13,6 +13,7 @@ const roomSchema = new Schema({
 	avatar: {
 		type: String
 	},
+	messages: [{type: mongoose.Schema.Types.ObjectId, ref: 'Message'}],
 	members: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
 })
 

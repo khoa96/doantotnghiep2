@@ -1,67 +1,39 @@
-const User = require('../models/user')
-const Room = require('../models/room');
+
 const express =  require('express');
+const Message = require('../models/message');
+const dateFormat = require('dateformat');
 const router = express.Router();
-module.exports = function(io, arrUser) {
+module.exports = function(io) {
 
     io.on('connection', function(socket) { 
-	   // lang nghe su kien tim kiem nguoi dung de them vao nhom.
-	   socket.on('client-send-search-username-to-server', (data) => {
-		
-		User.find({username: new RegExp(data.username, 'i'), _id: {$nin: data.userIds}}, function(err, users) {
-		   if(err) {
-			   console.log(err);
-		   } else {
-			 if(users.length > 0) {
-				socket.emit('server-send-search-result-by-name-to-client', users);
-			 }
-		   }
-		});
-	   })
-
-	   // lang nghe su kie tao nhom chat (create group chat)
-	   socket.on('create-group-chat', (data) => {
-		   const groupName = data.groupName;
-		   const arrUserId = data.arrUserId;
-		   const room = new Room({
-			   name: groupName,
-			   members: arrUserId
-			});
-			
-			// neu room chat da ton tai thi ko them.
-			Room.findOne({name: groupName}, (err, result) => {
-				if(err) {
-					console.log(err);
-				} else {
-					if(result != null || result != undefined) {
-					
-						socket.emit('server-send-error-create-room-to-client', result);
-					} else {
-						room.save((err, room) => {
-							if(err) {
-								console.log(err);
-							} else {
-								// lay toan bo thong tin cua cac thanh vien trong nhom
-							//    Room.findById({_id: group._id}).populate('members').exec((err, results) => {
-							// 	   if(err) {
-							// 		   console.log(err);
-							// 	   } else {
-							// 		   console.log(results);
-							// 	   }
-							//    })
-							
-							// emit thong tin create nhom den tat ca cac thanh vien trong nhom.
-							socket.emit('server-broadcast-group-chat-to-client', room);
-							arrUser.forEach(user => {
-								socket.to(user.socket_id).emit('server-broadcast-group-chat-to-client', room);
-							});
-							}
-					   })
-					}
-				}
-			})
-	   })
-      
+        // lang nghe su kien client yeu cau socket join vao 1 room.
+        socket.on('create-room', (data) => {
+            if (socket.room) {
+                // leave previous room
+                socket.leave(socket.room);
+            }
+            // join new room
+            socket.join(data.group);
+            socket.room = data.group;
+        })
+       // server lang nghe su co tin nhan gui len
+       socket.on('client-send-group-message-to-server', (data) => {
+           let message = new Message({
+               creator: data.idCreator,
+               body: data.body, 
+               time: data.time,
+               group: data.group,
+               type: 'text'
+           });
+           message.save((err, result) => {
+               if(err) {
+                   console.log(err);
+               } else {
+                   console.log(result);
+                 io.sockets.in(socket.room).emit("server-broadcast-message-to-room",data);
+               }
+           })
+       })
     });
 
     return router;

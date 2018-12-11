@@ -25,7 +25,9 @@ const userSchema = new Schema({
 		state: {
 			type: String,
 			default: 'off'
-		}
+		},
+		groups: [{type: mongoose.Schema.Types.ObjectId, ref: 'Room'}],
+		messages: [{type: mongoose.Schema.Types.ObjectId, ref: 'Message'}]
 })
 //authenticate input against database
 userSchema.statics.authenticate = function (email, password, callback) {
