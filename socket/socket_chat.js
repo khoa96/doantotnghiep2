@@ -19,14 +19,18 @@ module.exports = function(io) {
 
         // server lang nghe yeu cau load lai tin nhan tu phia client cua room chat.
         socket.on('client-request-get-group-message-history-to-server', (data) => {
-            console.log(data);
-            Message.find({group: data}, (err, messages) => {
+            console.log(data); // console.log : roomId
+            Message.find({group: data}).populate('creator').exec((err, result) => {
                 if(err) {
                     console.log(err);
+                    
                 } else {
-                    socket.emit('server-send-group-message-history-to-client', messages);
+                   if(result.length > 0) {
+                    socket.emit('server-send-group-message-history-to-client', result);
+                   }
                 }
             })
+            
         })
        // server lang nghe su co tin nhan gui len
        socket.on('client-send-group-message-to-server', (data) => {
@@ -43,6 +47,7 @@ module.exports = function(io) {
                } else {
                  io.sockets.in(socket.room).emit("server-broadcast-message-to-room",data);
                }
+               
            })
        })
     });
