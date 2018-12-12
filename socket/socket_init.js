@@ -27,39 +27,22 @@ module.exports = function(io, arrUser) {
                 if(err) {
                     console.log(err);
                 } else {
-                   if(rooms.length > 0 ) {
-                        var promises = [];
 
-                        for(var numb in req.body)
-                        {
-                            promises.push(checkValue(numb));
-                        }
-                        
-                        Promise.all(promises)    
-                        .then(function(data){ /* do stuff when success */ })
-                        .catch(function(err){ /* error handling */ });
-                        
-                        function checkValue(numb){
-                        return new Promise(function(resolve, reject){
-                        
-                        });
-                    //    let arrLastMessage = [];
-                    //    rooms.forEach(room => {
-                    //        Message.find({group: room._id}).sort({time: -1}).limit(1).exec((err, last_messge) => {
-                    //            if(err) {
-                    //                console.log(err)
-                    //            } else {
+                       let arrLastMessage = [];
+                    //  rooms.forEach(room => {
+                    //       Message.find({group: room._id}).sort({time: -1}).limit(1).exec((err, last_messge) => {
+                    //         if(err) {
+                    //              console.log(err)
+                    //           } else {
                     //                arrLastMessage.push(last_messge);
-                    //            }
+                    //             }
                     //        })
-                    //    });
-                       //console.log(rooms);
-                     //  socket.emit('server-send-all-group-to-client', {rooms: rooms, arrLastMessage: arrLastMessage});
-                   }
-        
+                    //     });
+                  
+                       socket.emit('server-send-all-group-to-client', {rooms: rooms, arrLastMessage: arrLastMessage});
                 }
-            }) 
         })
+    });
         
         // khi huy 1 socket ==> xoa socket trong mang arrUser
         socket.on('disconnect',function(){

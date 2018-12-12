@@ -186,14 +186,14 @@ $(document).ready(function () {
 				$('.list-message').append(message);
    
 			}
-			
-			$("#conversation").animate({
-				scrollTop : $('#conversation').get(0).scrollHeight
-			});
+		
 
 		}
 	 }
-	 
+	 	
+	 $("#conversation").animate({
+		scrollTop : $('#conversation').get(0).scrollHeight
+	});
 	
 });
 
