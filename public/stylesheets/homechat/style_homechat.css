@@ -378,6 +378,7 @@ body {
 }
 
 .message-main-receiver {
+    margin-left:  15px;
     /*padding: 10px 20px;*/
     max-width: 60%;
     font-family: "Helvetica Neue", "Segoe UI", "Helvetica, Arial", "sans-serif";

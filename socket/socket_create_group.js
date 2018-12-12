@@ -97,7 +97,7 @@ module.exports = function(io, arrUser) {
 							 if(err ) {
 								 console.log(err);
 							 } else {
-								 console.log(room)
+								
 								socket.emit('server-broadcast-private-chat-to-client', room);
 								data.arrUserId.forEach((userId) => {
 									socket.to(getSocketId(arrUser, userId)).emit('server-broadcast-private-chat-to-client', room);

@@ -152,16 +152,16 @@ $(document).ready(function () {
 	 // du lieu tra ve la 1 mang cac message. voi moi message da dc join voi 1 user tuong ung.
 	 var creator =  $(".side .side-one .heading .heading-avatar .heading-avatar-icon").attr('id');
 	 
-	 data.forEach(message => {
-		if(message.type == 'text'){
+	 for( var i = 0; i < data.length; i++) {
+		if(data[i].type == 'text'){
 			// neu la tin nhan dang text.
-			if(creator == message.creator._id) {
+			if(creator == data[i].creator._id) {
 				// neu la tin nhan cua user
 				var message  = ' <div class="row message-body"> ';
 				   message += ' <div class="col-sm-12 message-main-sender"> ';
 				   message += ' <div class="sender"> ';
-				   message += ' <div class="message-text">'+ message.body +' </div>';
-				   message += ' <span class="message-time pull-right">'+ formatDate(new Date(message.time)) +'</span> ';
+				   message += ' <div class="message-text">'+ data[i].body +' </div>';
+				   message += ' <span class="message-time pull-right">'+ formatDate(new Date(data[i].time)) +'</span> ';
 				   message += ' </div> ';
 				   message += ' </div> ';
 				   message += ' </div> ';
@@ -172,12 +172,12 @@ $(document).ready(function () {
 				var message = ' <div class="row message-body"> ';
 				message += ' <div class="col-sm-12 message-main-receiver"> ';
 				message += ' <div class="left" style="width: 10%;float: left;margin-top: 10px"> ';
-				message += '  <img src="./uploads/'+ message.creator.avatar +'" style="display: block;with:40px;height: 40px;border-radius: 50%;margin-top: 15px" data-toggle="tooltip" data-placement="top" title="'+ message.creator.time +'"> ';
+				message += '  <img src="./uploads/'+ data[i].creator.avatar +'" style="display: block;with:40px;height: 40px;border-radius: 50%;margin-top: 15px" data-toggle="tooltip" data-placement="top" title="'+ data[i].creator.username +'"> ';
 				message += ' </div>';
 				message += ' <div class="right" style="width: 90%;float: left;">';
 				message += ' <div class="receiver">';
-				message += ' <div class="message-text" >'+ message.body +'</div> ';
-				message += ' <span class="message-time pull-right">'+ formatDate(new Date(message.time)) +'</span>';
+				message += ' <div class="message-text" >'+ data[i].body +'</div> ';
+				message += ' <span class="message-time pull-right">'+ formatDate(new Date(data[i].time)) +'</span>';
 			
 				message += ' </div> ';
 				message += ' </div> ';
@@ -192,48 +192,9 @@ $(document).ready(function () {
 			});
 
 		}
-	 });
+	 }
 	 
-	//  data.forEach(message => {
-	// 	 if(message.type == 'text') {
-	// 		 // hien thi tin nhan theo kieu text.
-	// 		 if(message.creator._id == creator) {
-	// 			 // tin nhan cho chinh  user gui di,.
-	// 			 var message  = ' <div class="row message-body"> ';
-	// 			message += ' <div class="col-sm-12 message-main-sender"> ';
-	// 			message += ' <div class="sender"> ';
-	// 			message += ' <div class="message-text">'+ message.body +' </div>';
-	// 			message += ' <span class="message-time pull-right">'+ formatDate(new Date(message.time)) +'</span> ';
-	// 			message += ' </div> ';
-	// 			message += ' </div> ';
-	// 			message += ' </div> ';
-	// 			$(".list-message").append(message);
-
-	// 		 } else {
-	// 			 // tin nhan ko phai do chinh user gui di. 
-
-	// 			 var message = ' <div class="row message-body"> ';
-	// 			message += ' <div class="col-sm-12 message-main-receiver"> ';
-	// 			message += ' <div class="left" style="width: 10%;float: left;margin-top: 10px"> ';
-	// 			message += '  <img src="./uploads/'+ message.creator.avatar +'" style="display: block;with:40px;height: 40px;border-radius: 50%;margin-top: 15px" data-toggle="tooltip" data-placement="top" title="'+ message.creator.username+'"> ';
-	// 			message += ' </div>';
-	// 			message += ' <div class="right" style="width: 90%;float: left;">';
-	// 			message += ' <div class="receiver">';
-	// 			message += ' <div class="message-text" >'+ message.body +'</div> ';
-	// 			message += ' <span class="message-time pull-right">'+ formatDate(new Date(message.time))  +'</span>';
-	// 			message += ' </div> ';
-	// 			message += ' </div> ';
-	// 			message += ' </div> ';
-	// 			message += ' </div> ';
-	// 			$('.list-message').append(message);
-	// 		 }
-
-	// 		 $("#conversation").animate({
-	// 			scrollTop : $('#conversation').get(0).scrollHeight
-	// 		});
-
-	// 	 }
-	//  });
+	
 });
 
 

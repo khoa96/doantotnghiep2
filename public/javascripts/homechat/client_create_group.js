@@ -49,28 +49,28 @@ $(document).ready(function () {
    //2 . lang nghe server tra ve group chat  sau khi tao.
    
    socket.on ('server-broadcast-group-chat-to-client',function (data) {
-    var groupName = data.name;
-    var groupId = data._id;
-    var group = ' <div class="row sideBar-body" id="'+groupId+'" >';
-    group += ' <div class="col-sm-3 col-xs-3 sideBar-avatar"> ';
-    group += ' <div class="avatar-icon">';
-    group += ' <img src="'+ data.avatar_group +'">';
-    group += ' </div>';
-    group += ' </div> ';
-    group += ' <div class="col-sm-9 col-xs-9 sideBar-main">';
-    group += ' <div class="row"> ';
-    group += ' <div class="col-sm-8 col-xs-8 sideBar-name">';
-    group += ' <p class="name-meta" ><strong>'+groupName+'</strong></p>';
-    group += ' <p class="message-history">nguyen dang khoa hoc vien cong nghe buu chinh vien thong</p>';
-    group += ' </div>';
-    group += ' <div class="col-sm-4 col-xs-4 pull-right sideBar-time"> ';
-    group += ' <span class="time-meta pull-right">11:23</span>';
-    group += ' </div>';
-    group += ' </div>';
-    group += ' </div>';
-    group += ' </div>';
+		var groupName = data.name;
+		var groupId = data._id;
+		var group = ' <div class="row sideBar-body" id="'+groupId+'" >';
+			group += ' <div class="col-sm-3 col-xs-3 sideBar-avatar"> ';
+			group += ' <div class="avatar-icon">';
+			group += ' <img src="'+ data.avatar_group +'">';
+			group += ' </div>';
+			group += ' </div> ';
+			group += ' <div class="col-sm-9 col-xs-9 sideBar-main">';
+			group += ' <div class="row"> ';
+			group += ' <div class="col-sm-8 col-xs-8 sideBar-name">';
+			group += ' <p class="name-meta" ><strong>'+groupName+'</strong></p>';
+			group += ' <p class="message-history">'+groupName+' đã kết nối với nhau</p>';
+			group += ' </div>';
+			group += ' <div class="col-sm-4 col-xs-4 pull-right sideBar-time"> ';
+			group += ' <span class="time-meta pull-right">11:23</span>';
+			group += ' </div>';
+			group += ' </div>';
+			group += ' </div>';
+			group += ' </div>';
 
-    $(".list-message-history").prepend(group);
+			$(".list-message-history").prepend(group);
 
   }); 
 
