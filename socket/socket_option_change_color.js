@@ -7,7 +7,8 @@ const router = express.Router();
 module.exports = function(io, arrUser) {
 
     io.on('connection', function(socket) { 
-		socket.on('client-request-change-name-group-to-serve', function(data){
+		
+		socket.on('client-change-color-group-to-server', function(data){
 			 const message = new Message({
 				 creator: data.creator,
 				 body: data.body,
@@ -20,12 +21,12 @@ module.exports = function(io, arrUser) {
 					 console.log(err);
 				 } else {
 					 // sau khi luu tin nhan ==> update ten nhom
-					 Room.findByIdAndUpdate(data.group, {name: data.groupName }, (err, room) => {
+					 Room.findByIdAndUpdate(data.group, {color: data.color }, (err, room) => {
 						 if(err) {
 							 console.log(err)
 						 } else {
 							 // emit ve tat cac cac user trong nhom
-							 io.sockets.in(socket.room).emit("server-broadcast-change-name-group-to-group",data);
+							 io.sockets.in(socket.room).emit("server-broadcast-color-to-all-client-in-group",data);
 						 }
 					 })
 				 }

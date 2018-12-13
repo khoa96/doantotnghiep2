@@ -1,7 +1,7 @@
 
 const express =  require('express');
 const Message = require('../models/message');
-const dateFormat = require('dateformat');
+const Room = require('../models/room')
 const router = express.Router();
 module.exports = function(io) {
 
@@ -13,8 +13,8 @@ module.exports = function(io) {
                 socket.leave(socket.room);
             }
             // join new room
-            socket.join(data.group);
-            socket.room = data.group;
+            socket.join(data);
+            socket.room = data;
         })
 
         // server lang nghe yeu cau load lai tin nhan tu phia client cua room chat.
@@ -39,7 +39,7 @@ module.exports = function(io) {
                body: data.body, 
                time: data.time,
                group: data.group,
-               type: 'text'
+               type: data.type
            });
            message.save((err, result) => {
                if(err) {
@@ -50,6 +50,19 @@ module.exports = function(io) {
                
            })
        })
+
+       //client yeu cau mau sac cua group.
+		socket.on('client-request-get-color-of-group', (data) => {
+            Room.findById(data, (err, room) => {
+                if(err) {
+                    console.log(err);
+                } else {
+                
+                    socket.emit('server-response-color-group-to-client', room)
+                   
+                }
+            })
+          })
     });
 
     return router;

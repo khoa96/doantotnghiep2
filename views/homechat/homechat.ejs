@@ -278,77 +278,56 @@
 
     <!--4. modal add user  to group-->
     <div class="modal fade animated  zoomIn" id="modal-add-user-to-group" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="width: 500px;">
+        <div class="modal-dialog" style="width: 650px;">
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <p style="font-size: 14px;"><strong>Thêm người khác vào nhóm</strong></p>
                 </div>
                 <div class="modal-body">
-                    <div class="box-search-user-in-group editable"  data-placeholder="Nhập tên một người bạn" contenteditable="true">
-
+                    <div class="input-search-chat-group">
+                       <div class="row">
+                          <div  class="editable">
+                            <div  contentEditable=true class="left editable" data-placeholder="nhập tên của một user" style="border: 1px solid lightgrey;margin-left:15px; width:32%; float: left"></div>
+                            <div  contentEditable=true class="right editable" data-placeholder="danh sách user"   style="border: 1px solid lightgrey; width:65%; float: left"></div>
+                          </div>
+                       </div>
                     </div>
+                    
                     <div class="result-search-user">
-                        <div class="user" id = "">
-                            <div class="avatar" >
-                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
+                        <div class="row user-chat-body user-add-to-group" id="">
+                            <div class="col-sm-3 col-xs-3 user-chat-avatar">
+                                <div class="user-chat-avatar-icon">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png">
+                                </div>
                             </div>
-                            <div class="name" > Đăng Khoa</div>
-                        </div>
-                        <div class="user" id="2">
-                            <div class="avatar" >
-                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
+                            <div class="col-sm-9 col-xs-9 user-chat-main">
+                                <div class="row">
+                                    <div class="col-sm-8 col-xs-8 user-chat-name">
+                                        <span class="user-chat-name-meta">Nguyen Hoang Trung Hieu </span>
+                                    </div>
+                                    <div class="col-sm-4 col-xs-4 pull-right ">
+                                        <span class="time-meta pull-right "><span class="user-state"></span></span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="name" >Trung Hiếu</div>
                         </div>
-                        <div class="user" id="3">
-                            <div class="avatar" >
-                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
+                        <div class="row user-chat-body user-add-to-group" id="">
+                            <div class="col-sm-3 col-xs-3 user-chat-avatar">
+                                <div class="user-chat-avatar-icon">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png">
+                                </div>
                             </div>
-                            <div class="name" >Nhật Minh</div>
-                        </div>
-                        <div class="user" id="4">
-                            <div class="avatar" >
-                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
+                            <div class="col-sm-9 col-xs-9 user-chat-main">
+                                <div class="row">
+                                    <div class="col-sm-8 col-xs-8 user-chat-name">
+                                        <span class="user-chat-name-meta" style="font-size: 14px">Nguyen Hoang Trung Hieu </span>
+                                    </div>
+                                    <div class="col-sm-4 col-xs-4 pull-right ">
+                                        <span class="time-meta pull-right "><span class="user-state"></span></span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="name" >Tuấn Dũng</div>
                         </div>
-                        <div class="user" id="5">
-                            <div class="avatar" >
-                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
-                            </div>
-                            <div class="name" >Hoàng Anh</div>
-                        </div>
-                        <div class="user">
-                            <div class="avatar" >
-                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
-                            </div>
-                            <div class="name" >Nguyễn Đăng Khoa</div>
-                        </div>
-                        <div class="user">
-                            <div class="avatar" >
-                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
-                            </div>
-                            <div class="name" >Nguyễn Đăng Khoa</div>
-                        </div>
-                        <div class="user">
-                            <div class="avatar" >
-                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
-                            </div>
-                            <div class="name" >Nguyễn Đăng Khoa</div>
-                        </div>
-                        <div class="user">
-                            <div class="avatar" >
-                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
-                            </div>
-                            <div class="name" >Nguyễn Đăng Khoa</div>
-                        </div>
-                        <div class="user">
-                            <div class="avatar" >
-                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
-                            </div>
-                            <div class="name" >Nguyễn Đăng Khoa</div>
-                        </div>
-
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -379,6 +358,9 @@
 <script src="./javascripts/homechat/client_chat.js"></script>
 <script src="./javascripts/homechat/action/js_option_group.js"></script>
 <script src="./javascripts/homechat/client_option_chang_name_group.js"></script>
+<script src="./javascripts/homechat/client_option_change_color.js"></script>
+<script src="./javascripts/homechat/client_option_other_group.js"></script>
+
 
 </body>
 </html>

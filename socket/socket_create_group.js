@@ -15,7 +15,6 @@ module.exports = function(io, arrUser) {
     io.on('connection', function(socket) { 
 	   // lang nghe su kien tim kiem nguoi dung de them vao nhom.
 	   socket.on('client-send-search-username-to-server', (data) => {
-		
 		User.find({username: new RegExp(data.username, 'i'), _id: {$nin: data.userIds}}, function(err, users) {
 		   if(err) {
 			   console.log(err);
