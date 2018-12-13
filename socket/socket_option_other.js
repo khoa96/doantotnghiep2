@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 const User = require('../models/user')
 const Room = require('../models/room')
 const express =  require('express');
@@ -21,26 +23,31 @@ module.exports = function(io) {
 
         // 2. them nguoi vao nhom
         // 2.1 : tim kiem user de them vao nhom.
-        socket.on('search-user-add-to-group', (data) => {
-            Room.findById(data.groupId, (err, room) => {
-                if(err) {
-                    console.log(err)
-                } else {
-                    console.log('fdsfd');
-                    User.find({username: new RegExp(data.username, 'i'), _id: {$nin: room.members}}, function(err, users) {
-                        if(err) {
-                            console.log(err);
-                        } else {
-                           if(users.length > 0) {
-                               socket.emit('server-respone-search-user-to-client', users);
-                           }
-                        }
-                     });
-                }
-            })
+        socket.on('client-send-username-add-to-group', (data) => {
+           // tim kiem theo user.
+           User.find({username: new RegExp(data.username, 'i'), _id: {$nin: data.userIds}}, function(err, users) {
+            if(err) {
+                console.log(err);
+            } else {
+              if(users.length > 0) {
+                
+                 socket.emit('server-send-user-add-to-group-to-client', users);
+              }
+            }
+         });
         })
 
-	  
+        // 2.2 : them new user vao trong group.
+        socket.on('add-new-user-to-group', (data) => {
+           Room.findByIdAndUpdate(data.group, {$set: {members: data.arrUserIds}}, (err, result) => {
+               if(err) {
+                   console.log(err)
+               } else {
+                   console.log(result)
+               }
+           })
+             
+        })
     });
 
     return router;

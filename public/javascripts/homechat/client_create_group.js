@@ -145,7 +145,7 @@ $(document).ready(function () {
             userIds.push($(this).attr('id'));
 		});
 		 
-	   if(username != ""){
+	   if(username.trim() != ""){
 		   socket.emit('client-send-search-username-to-server',{username: username, userIds: userIds});
 	   } else {
 		 $(document).find('.search-result-user-group').hide();
@@ -170,7 +170,7 @@ $(document).on('click','#btn-click-create-group',function(){
 				avatar_group: './images/group1.png',
 				arrUserId: arrUserId
 			}
-			console.log(room);
+			
 			socket.emit('create-group-chat', room);
 			
 		} else if (listUser.length  == 1) {

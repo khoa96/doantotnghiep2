@@ -47,7 +47,6 @@ $(document).ready(function(){
     $(document).on('click', '#btn-click-hide-modal-add-user-to-group', function(){
         $("#modal-add-user-to-group").toggleClass('zoomOut');
     });
-
     $(document).on('click', '.user', function () {
         var id = $(this).attr('id');
         var avatar = $(this).find('.avatar img').attr('src');
@@ -56,5 +55,5 @@ $(document).ready(function(){
         var user_lable = '<span class="label label-warning" contenteditable="false" id="'+id+'" data-avatar="'+avatar+'">'+username+'</span>';
         (".box-search-user-in-group").removeAttr('data-placeholder').prepend(user_lable);
      });
-
+   
 });

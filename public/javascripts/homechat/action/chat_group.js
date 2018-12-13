@@ -40,14 +40,13 @@ $(document).ready(function () {
 	});
 	
 	// khi click vao ket qua tim kiem thi se them user vao o chua cac thanh vien trong nhoms
-	//click each item in result list search.
+	//click each item in result list search. ( them vao nhom chua co)
     $(document).on('click','.user-search',function(){
         var username = $(this).find(".sideBar-main .name-meta").text();
         var id = $(this).attr('id');
         var avatar = $(this).find(".sideBar-avatar .avatar-icon img").attr('src');
         $(".box-search-user-group .right").append('<span class="label label-warning" contenteditable="false" id="'+id+'" data-avatar="'+avatar+'">'+username+'</span>').focusin();
-        $(document).find('.search-result-user-group').css('display','none');
         $(".box-search-user-group .left").text("");
-    });
-
+	});
+	
 });

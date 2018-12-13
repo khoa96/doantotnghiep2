@@ -23,7 +23,6 @@ module.exports = function(io) {
             Message.find({group: data}).populate('creator').exec((err, result) => {
                 if(err) {
                     console.log(err);
-                    
                 } else {
                    if(result.length > 0) {
                     socket.emit('server-send-group-message-history-to-client', result);
@@ -34,21 +33,20 @@ module.exports = function(io) {
         })
        // server lang nghe su co tin nhan gui len
        socket.on('client-send-group-message-to-server', (data) => {
-           let message = new Message({
-               creator: data.idCreator,
-               body: data.body, 
-               time: data.time,
-               group: data.group,
-               type: data.type
-           });
-           message.save((err, result) => {
-               if(err) {
-                   console.log(err);
-               } else {
-                 io.sockets.in(socket.room).emit("server-broadcast-message-to-room",data);
-               }
-               
-           })
+            let message = new Message({
+                creator: data.idCreator,
+                body: data.body, 
+                time: data.time,
+                group: data.group,
+                type: data.type
+            });
+            message.save((err, result) => {
+                if(err) {
+                    console.log(err);
+                } else {
+                io.sockets.in(socket.room).emit("server-broadcast-message-to-room",data);
+                }  
+            })
        })
 
        //client yeu cau mau sac cua group.
