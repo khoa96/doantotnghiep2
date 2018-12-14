@@ -4,8 +4,17 @@ const User = require('../models/user')
 const Room = require('../models/room')
 const express =  require('express');
 const router = express.Router();
-module.exports = function(io) {
-
+module.exports = function(io, arrUser) {
+    
+//  funtion lay tim kiem id cua socket trong mang socket .
+	function getSocketId (arrUser, UserId){
+		for(var i = 0 ; i < arrUser.length; i++){
+			if(arrUser[i].id_send == UserId){
+				return arrUser[i].socket_id;
+			}
+		}
+    }
+    
     io.on('connection', function(socket) { 
         // lang nghe su kien ( cac option khac cua group , load user them , them user, user ra khoi nhom)
 
@@ -30,7 +39,6 @@ module.exports = function(io) {
                 console.log(err);
             } else {
               if(users.length > 0) {
-                
                  socket.emit('server-send-user-add-to-group-to-client', users);
               }
             }
@@ -43,7 +51,12 @@ module.exports = function(io) {
                if(err) {
                    console.log(err)
                } else {
-                   console.log(result)
+                   // sau khi update thanh cong ==> emit ve tat ca nhung thanh vien khac .
+                   const arrUserId = data.arrUserIds;
+                
+                   arrUserId.forEach((userId) => {
+                    socket.to(getSocketId(arrUser, userId)).emit('server-send-room-to-new-use', data);
+                 })
                }
            })
              

@@ -39,64 +39,36 @@ router.post('/login', (req, res) => {
    const email = req.body.user_login_email;
    const password = req.body.user_login_pass;
    if(email &&  password) {
-        User.authenticate(email, password, function (error, user) {
-            if (error || !user) {
-                
+       User.findOne({email: email, password: password}, (err, user) => {
+            if (err || !user) {
+                    
                 const loginMessage = {
                     user: {email: email, password: password},
                     message : 'Địa chỉ email hoặc mật khẩu không đúng. Xin kiểm tra lại',
                     status: 'false'
                 }
                 res.render('login/login', {loginMessage: loginMessage});
-            } else { 
-               
-                req.session.userId = user._id; // luu user_id vao trong session .
-                // cap nhat lai trang thai state = on
+            } else {
                 user.state = 'on';
                 user.save((err, result) => {
                     if(err) {
                         res.send('false');
                     } else {
-                        return res.redirect('/homechat');
+                        const homechatInfo = {
+                            user: user
+                            
+                        };
+                        res.render('homechat/homechat', {homechatInfo: homechatInfo});
                     }
                 });
             }
-        });
-   }
+       })   
+    }
 });
 
 /*GET homechatpasge */
 // phai dang nhap thanh cong moi dc chuyen sang trang nay.
-router.get('/homechat', function(req, res) {
-    // truoc khi vao homechat ==> phai dang nhap => kiem tra session.
-    User.findById(req.session.userId)
-    .exec(function (error, user) {
-      if (error) {
-        return next(error);
-      } else {
-        if (user === null) {
-           res.redirect('/');
-        } else {
-            // load toan bo cac user on line co trong bang user .
-            User.find({state: 'on', _id: {$nin: user._id}}, (err, user_onlines) => {
-                if(err) {
-                    res.send(err);
-                } else {
-                    if(user_onlines.length > 0 ){
-                        const homechatInfo = {
-                            user: user,
-                            user_onlines: user_onlines
-                        };
-                    
-                        res.render('homechat/homechat', {homechatInfo: homechatInfo});
-                    }
-                }
-            })
-          
-        }
-      }
-    });
-});
+
 
 /*POST user to server */
 router.post('/singup', (req, res) => {

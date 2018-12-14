@@ -20,8 +20,8 @@ $(document).ready(function () {
 		   }
 	   }
 	}
-	//-0-----------------END FUCNTION----------------
-	// client lang nghe server tra ve tat ca  nhom ma 1 user tham gia.
+	//-----------------END FUCNTION----------------
+	// 1.client lang nghe server tra ve tat ca  nhom ma 1 user tham gia.
 	socket.on('server-send-all-group-to-client', function(data) {
 	   //  data la 1 mang cac group ma user da tham gia.
 	   var rooms = data.rooms;
@@ -66,7 +66,7 @@ $(document).ready(function () {
 					group += ' <div class="row"> ';
 					group += ' <div class="col-sm-8 col-xs-8 sideBar-name">';
 					group += ' <p class="name-meta" ><strong>'+ rooms[i].username_recepient+'</strong></p>';
-					group += ' <p class="message-history">'+ getMessageByGroupId(arrLastMessage, rooms[i]._id) +'</p>';
+					group += ' <p class="message-history">last message</p></p>';
 					group += ' </div>';
 					group += ' <div class="col-sm-4 col-xs-4 pull-right sideBar-time"> ';
 					group += ' <span class="time-meta pull-right"></span>';
@@ -89,7 +89,7 @@ $(document).ready(function () {
 					group += ' <div class="row"> ';
 					group += ' <div class="col-sm-8 col-xs-8 sideBar-name">';
 					group += ' <p class="name-meta" ><strong>'+ rooms[i].username_send +'</strong></p>';
-					group += ' <p class="message-history">'+ getMessageByGroupId(arrLastMessage, rooms[i]._id)+'</p></p>';
+					group += ' <p class="message-history">last message</p>';
 					group += ' </div>';
 					group += ' <div class="col-sm-4 col-xs-4 pull-right sideBar-time"> ';
 					group += ' <span class="time-meta pull-right"></span>';
@@ -101,7 +101,32 @@ $(document).ready(function () {
 			}
 		}
 	}
-  })
+	})
+	
+	// 2. lan nghe server tra ve tat ca user online.
+	socket.on('server-respone-user-online-to-client', function(data) {
+		for(var i = 0; i < data.length; i++) {
+			var user =  ' <div class="row user-chat-body" id="'+data[i]._id+'"> ';
+				user += ' <div class="col-sm-3 col-xs-3 user-chat-avatar"> ';
+				user += ' <div class="user-chat-avatar-icon"> ';
+				user += ' <img src="./uploads/'+ data[i].avatar +'"> ';
+				user += ' </div> ';
+				user += ' </div> ';
+				user += ' <div class="col-sm-9 col-xs-9 user-chat-main"> ';
+				user += ' <div class="row">';
+				user += ' <div class="col-sm-8 col-xs-8 user-chat-name">';
+				user += ' <span class="user-chat-name-meta">'+data[i].username+'</span> ';
+				user += ' </div>';
+				user += ' <div class="col-sm-4 col-xs-4 pull-right "> ';
+				user += ' <span class="time-meta pull-right "><span class="user-state"></span></span> ';
+				user += ' </div> ';
+				user += ' </div> ';
+				user += ' </div> ';
+				user += ' </div> ';
+				$(".list-user-online").append(user);
+
+		}
+	})
 	// ham nay co chuc nang ==> gui user tu client luu den server
 	var id_send = $(".side .side-one .heading .heading-avatar .heading-avatar-icon").attr('id');
 	// dang ki thong tin socket voi server
@@ -109,4 +134,7 @@ $(document).ready(function () {
 	
 	// load toan bo cuoc noi chuyen cua user.
 	socket.emit('client-requesr-get-all-group-to-server', id_send);
+
+	// load toan bo user trong server.
+	socket.emit('client-request-get-all-user-online-to-server', id_send)
 });

@@ -44,7 +44,7 @@ module.exports = function(io) {
                 if(err) {
                     console.log(err);
                 } else {
-                io.sockets.in(socket.room).emit("server-broadcast-message-to-room",data);
+                   io.sockets.in(socket.room).emit("server-broadcast-message-to-room",data);
                 }  
             })
        })

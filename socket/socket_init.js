@@ -1,4 +1,3 @@
-
 const express =  require('express');
 const mongoose = require('mongoose');
 const User =  require('../models/user');
@@ -20,7 +19,7 @@ module.exports = function(io, arrUser) {
             
         });
 
-        // lang nghe su kien get toan  bo nhom ma user da tham gia.
+        // 1.lang nghe su kien get toan  bo nhom ma user da tham gia.
         // client gui len: id_client.
         socket.on('client-requesr-get-all-group-to-server', (data) => {
             Room.find({members: {$in: data}}, (err, rooms) => {
@@ -41,11 +40,25 @@ module.exports = function(io, arrUser) {
                   
                        socket.emit('server-send-all-group-to-client', {rooms: rooms, arrLastMessage: arrLastMessage});
                 }
+           })
+        });
+
+        // 2. get all user online.
+        socket.on('client-request-get-all-user-online-to-server', (data) => {
+            User.find({_id: {$nin: data}, state: 'on'}, (err, useronlines) => {
+                if(err) {
+                    console.log(err)
+                } else {
+                   if(useronlines.length > 0) {
+                     socket.emit('server-respone-user-online-to-client', useronlines)
+                   }
+                }
+            })
         })
-    });
         
         // khi huy 1 socket ==> xoa socket trong mang arrUser
         socket.on('disconnect',function(){
+            console.log('disconnect')
             for(let i = 0; i < arrUser.length; i++) {
                 if(arrUser[i].id_send == socket.id_send){
                     arrUser.splice(i,1);

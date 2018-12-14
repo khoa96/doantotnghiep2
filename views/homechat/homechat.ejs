@@ -144,17 +144,17 @@
             </div>
             <div class="row message list-user-online">
                 <!-- load all user online from server-->
-                <% homechatInfo.user_onlines.forEach(user_online => { %>
-                    <div class="row user-chat-body" id="<%= user_online._id %>">
+               
+                    <div class="row user-chat-body" id="">
                         <div class="col-sm-3 col-xs-3 user-chat-avatar">
                             <div class="user-chat-avatar-icon">
-                                <img src="./uploads/<%= user_online.avatar %> ">
+                                <img src="">
                             </div>
                         </div>
                         <div class="col-sm-9 col-xs-9 user-chat-main">
                             <div class="row">
                                 <div class="col-sm-8 col-xs-8 user-chat-name">
-                                    <span class="user-chat-name-meta"><%= user_online.username %> </span>
+                                    <span class="user-chat-name-meta"> </span>
                                 </div>
                                 <div class="col-sm-4 col-xs-4 pull-right ">
                                     <span class="time-meta pull-right "><span class="user-state"></span></span>
@@ -163,7 +163,7 @@
                         </div>
                     </div>
                     
-                <% }) %>
+               
             </div>
             <div class="row reply" style="background-color: white" >
                 <div class="col-sm-12 searchBox-inner" style="margin-top: -8px">
@@ -359,8 +359,8 @@
 <script src="./javascripts/homechat/action/js_option_group.js"></script>
 <script src="./javascripts/homechat/client_option_chang_name_group.js"></script>
 <script src="./javascripts/homechat/client_option_change_color.js"></script>
-<script src="./javascripts/homechat/client_option_other_group.js"></script>
-
+<script src="./javascripts/homechat/client_option_add_user_to_group.js"></script>
+<script src="./javascripts/homechat/client_option_leave_group.js"></script>
 
 </body>
 </html>

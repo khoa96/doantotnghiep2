@@ -67,9 +67,10 @@ require('./socket/socket_logout')(io);
 require('./socket/socket_create_group')(io, arrUser);
 require('./socket/socket_typing')(io);
 require('./socket/socket_chat')(io);
-require('./socket/socket_option_chang_name_group')(io)
-require('./socket/socket_option_change_color')(io)
-require('./socket/socket_option_other')(io)
+require('./socket/socket_option_chang_name_group')(io);
+require('./socket/socket_option_change_color')(io);
+require('./socket/socket_option_add_user_to_group')(io, arrUser);
+require('./socket/socket_option_leave_group')(io);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

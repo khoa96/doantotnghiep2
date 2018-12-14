@@ -236,7 +236,7 @@ $(document).ready(function () {
 	 	
 	 $("#conversation").animate({
 		scrollTop : $('#conversation').get(0).scrollHeight
-	});
+	 });
 	socket.emit('client-request-get-color-of-group', groupId);
 
 });

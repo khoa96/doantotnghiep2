@@ -1,6 +1,7 @@
 const User = require('../models/user')
-const Room = require('../models/room');
-const express =  require('express');
+const Room = require('../models/room')
+const Socket = require('../models/socket')
+const express =  require('express')
 const router = express.Router();
 module.exports = function(io, arrUser) {
 	 
@@ -17,7 +18,7 @@ module.exports = function(io, arrUser) {
 	   socket.on('client-send-search-username-to-server', (data) => {
 		User.find({username: new RegExp(data.username, 'i'), _id: {$nin: data.userIds}}, function(err, users) {
 		   if(err) {
-			   console.log(err);
+			   console.log(err)
 		   } else {
 			 if(users.length > 0) {
 				socket.emit('server-send-search-result-by-name-to-client', users);
@@ -96,12 +97,11 @@ module.exports = function(io, arrUser) {
 							 if(err ) {
 								 console.log(err);
 							 } else {
-								
 								socket.emit('server-broadcast-private-chat-to-client', room);
 								data.arrUserId.forEach((userId) => {
 									socket.to(getSocketId(arrUser, userId)).emit('server-broadcast-private-chat-to-client', room);
 							 	})
-							 }
+							}
 						 })
 					 }
 				  }

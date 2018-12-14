@@ -20,6 +20,6 @@ $(document).ready(function () {
 			user += ' </div> ';
 			user += ' </div> ';
 			user += ' </div> ';
-			$(".list-user-online").append(user);
+			$(".list-user-online").prepend(user);
 	});
 });

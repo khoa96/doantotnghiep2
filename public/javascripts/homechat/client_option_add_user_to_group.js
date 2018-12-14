@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	//  xu ly cac option khac cua group.
-	
+
 	// 1. lang nghe server tra ve cac user co trong group.
 	socket.on('server-response-all-user-in-group-to-client', function(data){
 		var users  = data.members;
@@ -100,6 +100,11 @@ $(document).ready(function () {
 			}
 		  }
 	  })
+
+	  // 2.2: user lang nghe tra ve new room cho user sau khi dc them.
+	  socket.on('server-send-room-to-new-use', function(data){
+		$(".list-message-history").prepend(data.room);
+	  })
 	
 
 	//1 . load tat ca nguoi dung. do len option.
@@ -142,12 +147,18 @@ $(document).ready(function () {
 
 	// 2.3 : them cac thanh vien vao trong nhom chat.
 	$(document).on('click', '#btn-click-add-user-to-group', function (){
+		
 		var creatorId = $(".side .side-one .heading .heading-avatar .heading-avatar-icon").attr('id'); // người  gui tin nhắn vào group
 		var groupId = $(".conversation .heading .heading-avatar .heading-avatar-icon-recipient").attr('id');
 		var creator = $(".side .side-one .heading .heading-username p").text();
 		var arrUserIds = [];
 		var usernames = creator + ' đã thêm ';
-		
+	
+		var listUser = $(document).find(".add-search-user-to-group span");	
+        listUser.each(function(){
+			arrUserIds.push($(this).attr('id'));
+			usernames += $(this).text() + ", ";
+		});
 		var message = {
 			idCreator: creatorId,
 			body: usernames,
@@ -155,19 +166,19 @@ $(document).ready(function () {
 			time: new Date(),
 			type: 'notification'
 		}
-		var listUser = $(document).find(".add-search-user-to-group span");	
-        listUser.each(function(){
-            arrUserIds.push($(this).attr('id'));
-		});
+		var room = ' <div class="row sideBar-body" id="'+ groupId +'" > ';
+		    room +=  $(".list-message-history").find("#" + groupId).html();
+		    room += ' </div> ';
 		// danh sach cac user  ban dau co trong group
 		var userOfGroup = $(document).find(".list-user-in-group .user-of-group");
 	     userOfGroup.each(function() {
 			 arrUserIds.push($(this).attr('id'))
 		 });
+		
 		// luu message vao trong csdl
-		//socket.emit('client-send-group-message-to-server', message);
-		// emit len phia server  yeu cau  them thanh vien vao group.
-		socket.emit('add-new-user-to-group', {group: groupId, arrUserIds: arrUserIds});
+	    socket.emit('client-send-group-message-to-server', message);
+	   // emit len phia server  yeu cau  them thanh vien vao group.
+		socket.emit('add-new-user-to-group', {group: groupId, arrUserIds: arrUserIds, room: room, creator: creatorId});
 		
 	})
 });
