@@ -89,7 +89,7 @@ $(document).ready(function () {
 		group += ' <div class="row"> ';
 		group += ' <div class="col-sm-8 col-xs-8 sideBar-name">';
 		group += ' <p class="name-meta" ><strong>'+ data.username_recepient+'</strong></p>';
-		group += ' <p class="message-history">nguyen dang khoa hoc vien cong nghe buu chinh vien thong</p>';
+		group += ' <p class="message-history">Các bạn đã kết nối với nhau.</p>';
 		group += ' </div>';
 		group += ' <div class="col-sm-4 col-xs-4 pull-right sideBar-time"> ';
 		group += ' <span class="time-meta pull-right"></span>';

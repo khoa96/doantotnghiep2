@@ -44,7 +44,7 @@ $(document).ready(function () {
 			    color: color,
 				type: 'notification'
 			}
-			console.log(message);
+			
 			socket.emit('client-change-color-group-to-server', message);
 		} else {
 			alert ("Bạn chưa chọn màu sắc");
