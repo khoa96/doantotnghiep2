@@ -19,7 +19,13 @@
     <link rel="stylesheet" href="./stylesheets/homechat/style_search_message.css">
    
     <title>ChatWork</title>
-   
+    <script language="JavaScript">
+        window.onbeforeunload = WindowCloseHanlder;
+        function WindowCloseHanlder()
+        {
+        window.alert('My Window is reloading');
+        }
+    </script>
 </head>
 <body>
 <div class="app">
@@ -370,7 +376,7 @@
 <script src="./javascripts/homechat/client_option_add_user_to_group.js"></script>
 <script src="./javascripts/homechat/client_option_leave_group.js"></script>
 <script src="./javascripts/homechat/client_send_image_message.js"></script>
-<script src="./javascripts/homechat/client_change_avatar_group.js"></script>
+
 </body>
 </html>
 
