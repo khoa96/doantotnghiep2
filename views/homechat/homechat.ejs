@@ -19,13 +19,7 @@
     <link rel="stylesheet" href="./stylesheets/homechat/style_search_message.css">
    
     <title>ChatWork</title>
-    <script language="JavaScript">
-        window.onbeforeunload = WindowCloseHanlder;
-        function WindowCloseHanlder()
-        {
-        window.alert('My Window is reloading');
-        }
-    </script>
+    
 </head>
 <body>
 <div class="app">
@@ -137,7 +131,7 @@
                     <form action="#" method="POST" enctype="multipart/form-data">
                         <div class="fileUpload btn">
                             <span class="glyphicon glyphicon-picture" style="font-size: 25px"></span>
-                            <input type="file" id="input-file" class="upload" accept="image/gif, image/jpeg, image/png"/>
+                            <input type="file" id="input-file" class="upload" accept="image/*" />
                         </div>
                      
                       </form>
@@ -278,7 +272,7 @@
                 <p>Mọi người trong cuộc trò chuyện sẽ nhìn thấy sự thay đổi này</p>
             </div>
             <div class="modal-body">
-                <input type="file" class="form-control" name="avatar-group" id="avatar-group" accept="image/x-png,image/gif,image/jpeg">
+                <input type="file" class="form-control" name="avatar-group" id="avatar-group" accept="image/*" >
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" id="btn-click-change-avatar-group" data-dismiss="modal" style="font-weight: bold;color: #0084ff;">Thay đổi</button>
