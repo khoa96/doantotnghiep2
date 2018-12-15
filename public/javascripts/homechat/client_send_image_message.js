@@ -17,20 +17,23 @@ $(document).ready(function () {
 			contentType: false,
 			success: function(data){
 				// data la ten anh tren server.
-				if(groupId != '') {
-					var message = {
-						idCreator: creator,
-						body: data,
-						userCreatdor: userCreator,
-				        avatarSend: $(".side .side-one .heading .heading-avatar .heading-avatar-icon img").attr('src'),
-						group: groupId,
-						time: new Date(),
-						type: 'image'
-	
+                 if(data != 'error') {
+					if(groupId != '') {
+						console.log(data);
+						var message = {
+							idCreator: creator,
+							body: data,
+							userCreatdor: userCreator,
+							avatarSend: $(".side .side-one .heading .heading-avatar .heading-avatar-icon img").attr('src'),
+							group: groupId,
+							time: new Date(),
+							type: 'image'
+		
+						}
+						
+						socket.emit('client-send-group-message-to-server',message);
 					}
-					
-					socket.emit('client-send-group-message-to-server',message);
-				}
+				 }
 			},
 			crossDomain: true
 		    

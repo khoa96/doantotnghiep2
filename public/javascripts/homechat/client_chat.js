@@ -266,7 +266,7 @@ $(document).ready(function () {
 			
 			
 		} else {
-			if(data.idCreator == creator ){
+			if(creator == data[i].creator._id ){
 				// thêm tin nhắn vào phía người gui
 				var message  = ' <div class="row message-body"> ';
 					message += ' <div class="col-sm-12 message-main-sender" style="margin-bottom:20px"> ';

@@ -9,6 +9,7 @@ $(document).ready(function () {
 	// nguoi  dung thay doi avatar cua cuoc tro chuyen.
 	$("#avatar-group").change(function (e) { 
 		var file = e.target.files[0];
+		console.log(file)
 		if(file){
 			$(document).on('click', '#btn-click-change-avatar-group', function(){
 				var creator =  $(".side .side-one .heading .heading-avatar .heading-avatar-icon").attr('id');
@@ -25,22 +26,28 @@ $(document).ready(function () {
 					contentType: false,
 					success: function(data){
 						// data la ten anh tren server.
-						var message = {
-							idCreator: creator,
-							body: userCreator + ' Đã thay đổi avatar của cuộc trò chuyện.',
-							group: groupId,
-							time: new Date(),
-							type: 'notification'
-		
+						if(data != 'error') {
+							if(groupId != ''){
+								var message = {
+									idCreator: creator,
+									body: userCreator + ' Đã thay đổi avatar của cuộc trò chuyện.',
+									group: groupId,
+									time: new Date(),
+									type: 'notification'
+				
+								}
+								console.log(data)
+								// luu thong bao vao trong csdl .
+								socket.emit('client-send-group-message-to-server',message);
+								// cap nhat lai avatar cua nhom tren csdl.
+								var room = {
+									group: groupId,
+									avatar: './uploads/' + data,
+								}
+								socket.emit('client-change-avatar-group-to-server', room )
+							}
 						}
-						// luu thong bao vao trong csdl .
-						socket.emit('client-send-group-message-to-server',message);
-						// cap nhat lai avatar cua nhom tren csdl.
-						var room = {
-							group: groupId,
-							avatar: './uploads/' + data,
-						}
-						socket.emit('client-change-avatar-group-to-server', room )
+
 					},
 					crossDomain: true
 					

@@ -157,7 +157,15 @@ router.get('/logout', function (req, res, next) {
 //
 router.post('/file', (req, res) => {
     upload(req, res, function (err) {
-      res.send(req.file.filename);
+        if(req.file == null || req.file == undefined || req.file == ""){
+            res.send('error')
+        } else {
+            if(err) {            
+                res.send('error')
+            } else {
+                res.send(req.file.filename);
+            }
+        }
     });
 
 });
