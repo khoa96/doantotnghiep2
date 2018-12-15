@@ -77,7 +77,12 @@ router.post('/singup', (req, res) => {
         // need to check if the req.file is set.
         if(req.file == null || req.file == undefined || req.file == ""){
             //redirect to the same url            
-            res.redirect("/");
+            const loginMessage = {
+                user: '',
+                message: 'File ảnh không hợp lệ ảnh phải có định dạng jpg/png/jpeg',
+                status: 'false'
+            }
+            res.render('login/login', {loginMessage: loginMessage});
             
         }else{
             // An error occurred when uploading
