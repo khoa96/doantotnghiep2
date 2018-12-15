@@ -35,6 +35,12 @@ $(document).ready(function(){
         $("#modal-change-name-group").modal('show').removeClass('zoomOut');
     });
 
+
+    // model change avatar group
+    $(document).on('click', '.change-avatar-group', function () {
+        $("#modal-change-avatar-group").modal('show').removeClass('zoomOut');
+    });
+
     $(document).on('click', '#btn-click-hide-modal-change-name-group', function(){
         $("#sub-modal-change-name-member").toggleClass('zoomOut');
     });

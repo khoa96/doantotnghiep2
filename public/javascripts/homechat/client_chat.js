@@ -23,6 +23,7 @@ $(document).ready(function () {
 		heading += ' <ul class="sub-menu collapse" id="heading"> ';
 		heading += ' <li class="change-name-group">Đổi tên nhóm</li> ';
 		heading += ' <li class="change-name-member">Chỉnh sửa biệt danh</li>';
+		heading += ' <li class="change-avatar-group">Thay đổi avatar của nhóm</li>';
 		heading += ' <li class="click-change-color">Thay đổi màu sắc</li>';
 		heading += ' <li class="click-out-group">Rời khỏi nhóm</li> ';
 		heading += ' </ul> ';
@@ -168,10 +169,10 @@ $(document).ready(function () {
 		if(data.idCreator == id_send){
 			// thêm tin nhắn vào phía người gui
 			var message  = ' <div class="row message-body"> ';
-				message += ' <div class="col-sm-12 message-main-sender"> ';
+				message += ' <div class="col-sm-12 message-main-sender" style="margin-bottom:20px"> ';
 				message += ' <div class="sender"  style="background-color: white" > ';
 				message += ' <div class="message-text"> <img src="./uploads/'+data.body+'" class="image-message" /></div>';
-				message += ' <span class="message-time pull-right">'+ formatDate(new Date(data.time)) +'</span> ';
+				message += ' <span class="message-time pull-right" style="color: #333">'+ formatDate(new Date(data.time)) +'</span> ';
 				message += ' </div> ';
 				message += ' </div> ';
 				message += ' </div> ';
@@ -187,7 +188,7 @@ $(document).ready(function () {
 		} else {
 			// nếu tin nhắn ko phải của mình gui đi.
 			var message = ' <div class="row message-body"> ';
-				message += ' <div class="col-sm-12 message-main-receiver"> ';
+				message += ' <div class="col-sm-12 message-main-receiver" style="margin-bottom:20px"> ';
 				message += ' <div class="left" style="width: 10%;float: left;margin-top: 10px"> ';
 				message += '  <img src="'+ data.avatarSend +'" style="display: block;with:40px;height: 40px;border-radius: 50%;margin-top: 15px" data-toggle="tooltip" data-placement="left" title="'+data.username_recipient+'"> ';
 				message += ' </div>';
@@ -268,10 +269,10 @@ $(document).ready(function () {
 			if(data.idCreator == creator ){
 				// thêm tin nhắn vào phía người gui
 				var message  = ' <div class="row message-body"> ';
-					message += ' <div class="col-sm-12 message-main-sender"> ';
+					message += ' <div class="col-sm-12 message-main-sender" style="margin-bottom:20px"> ';
 					message += ' <div class="sender"  style="background-color: white" > ';
 					message += ' <div class="message-text"> <img src="./uploads/'+data[i].body+'" class="image-message"/></div>';
-					message += ' <span class="message-time pull-right">'+ formatDate(new Date(data[i].time)) +'</span> ';
+					message += ' <span class="message-time pull-right" style="color: #333">'+ formatDate(new Date(data[i].time)) +'</span> ';
 					message += ' </div> ';
 					message += ' </div> ';
 					message += ' </div> ';
@@ -285,7 +286,7 @@ $(document).ready(function () {
 			} else {
 				// nếu tin nhắn ko phải của mình gui đi.
 				var message = ' <div class="row message-body"> ';
-					message += ' <div class="col-sm-12 message-main-receiver"> ';
+					message += ' <div class="col-sm-12 message-main-receiver" style="margin-bottom:20px"> ';
 					message += ' <div class="left" style="width: 10%;float: left;margin-top: 10px"> ';
 					message += '  <img src="./uploads/'+ data[i].creator.avatar +'" style="display: block;with:40px;height: 40px;border-radius: 50%;margin-top: 15px" data-toggle="tooltip" data-placement="left" title="'+data.username_recipient+'"> ';
 					message += ' </div>';
@@ -309,7 +310,7 @@ $(document).ready(function () {
 	 	
 	 $("#conversation").animate({
 		scrollTop : $('#conversation').get(0).scrollHeight
-	 });
+	 }, 1000);
 	socket.emit('client-request-get-color-of-group', groupId);
 
 });

@@ -11,7 +11,7 @@ $(document).ready(function () {
 		formData.append('image', file);
 		$.ajax({
 			type: "post",
-			url: "http://localhost:3000/file",
+			url: "/file",
 			data: formData,
 			processData: false,
 			contentType: false,
@@ -28,7 +28,7 @@ $(document).ready(function () {
 						type: 'image'
 	
 					}
-					console.log(message);
+					
 					socket.emit('client-send-group-message-to-server',message);
 				}
 			},

@@ -264,7 +264,26 @@
         </div>
     </div>
     <!--end modal change name group-->
+    <div class="modal fade animated  zoomIn" id="modal-change-avatar-group" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p ><strong>Chỉnh sửa avatar của cuộc trò chuyện</strong></p>
+                <p>Mọi người trong cuộc trò chuyện sẽ nhìn thấy sự thay đổi này</p>
+            </div>
+            <div class="modal-body">
+                <input type="file" class="form-control" name="avatar-group" id="avatar-group" placeholder="đặt tên của cuộc trò chuyện">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="btn-click-change-avatar-group" data-dismiss="modal" style="font-weight: bold;color: #0084ff;">Thay đổi</button>
+                <button type="button" class="btn btn-default" id="btn-click-hide-modal-change-name-group" data-dismiss="modal" style="color: #0084ff;">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- model change avatar group-->
 
+    <!-- end model change avatar group-->
     <!--4. modal add user  to group-->
     <div class="modal fade animated  zoomIn" id="modal-add-user-to-group" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="width: 650px;">
@@ -351,6 +370,7 @@
 <script src="./javascripts/homechat/client_option_add_user_to_group.js"></script>
 <script src="./javascripts/homechat/client_option_leave_group.js"></script>
 <script src="./javascripts/homechat/client_send_image_message.js"></script>
+<script src="./javascripts/homechat/client_change_avatar_group.js"></script>
 </body>
 </html>
 
