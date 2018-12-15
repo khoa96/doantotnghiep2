@@ -25,7 +25,7 @@ module.exports = function(io) {
                     console.log(err);
                 } else {
                    if(result.length > 0) {
-                       console.log(result)
+                      
                     socket.emit('server-send-group-message-history-to-client', result);
                    }
                 }
