@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" media="screen" href="./asset/bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-
+   
     <!------ Include the above in your HEAD tag ---------->
 
     <link rel="stylesheet" href="./stylesheets/homechat/style_homechat.css">
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="./stylesheets/homechat/style_search_message.css">
    
     <title>ChatWork</title>
-
+   
 </head>
 <body>
 <div class="app">
@@ -124,14 +124,23 @@
             </div>
             <div class="row reply"  >
 
-                <div class="col-sm-10 col-xs-10 reply-main">
+                <div class="col-sm-9 col-xs-9 reply-main">
                     <input class="form-control" rows="1"  placeholder="nhập nội dung tin nhắn" id="comment">
                 </div>
-                <div class="col-sm-1 col-xs-1 reply-recording">
-                    <i class="fa fa-microphone fa-2x" aria-hidden="true"></i>
+                <div class="col-sm-1 col-xs-1 reply-image" >
+                    <form action="#" method="POST" enctype="multipart/form-data">
+                        <div class="fileUpload btn">
+                            <span class="glyphicon glyphicon-picture" style="font-size: 25px"></span>
+                            <input type="file" id="input-file" class="upload" accept="image/gif, image/jpeg, image/png"/>
+                        </div>
+                     
+                      </form>
                 </div>
-                <div class="col-sm-1 col-xs-1 reply-send"  id="btn-click-send-message">
-                    <i class="fa fa-send fa-2x" aria-hidden="true"></i>
+                <div class="col-sm-1 col-xs-1 reply-send"  id="btn-click-send-message" style="padding: 0; cursor: pointer;">
+                    <span class="glyphicon glyphicon-send" style="font-size:23px; margin-top:4px;"></span>
+                </div>
+                <div class="col-sm-1 col-xs-1 reply-like"  id="btn-click-send-like-message" style="padding: 0; cursor: pointer;">
+                    <span class="glyphicon glyphicon-thumbs-up" style="font-size:30px; margin-top:6px"></span>
                 </div>
             </div>
         </div>
@@ -143,27 +152,7 @@
                 <p style="margin-top: 10px"><strong>DANH SÁCH USER ONLINE</strong></p>
             </div>
             <div class="row message list-user-online">
-                <!-- load all user online from server-->
-               
-                    <div class="row user-chat-body" id="">
-                        <div class="col-sm-3 col-xs-3 user-chat-avatar">
-                            <div class="user-chat-avatar-icon">
-                                <img src="">
-                            </div>
-                        </div>
-                        <div class="col-sm-9 col-xs-9 user-chat-main">
-                            <div class="row">
-                                <div class="col-sm-8 col-xs-8 user-chat-name">
-                                    <span class="user-chat-name-meta"> </span>
-                                </div>
-                                <div class="col-sm-4 col-xs-4 pull-right ">
-                                    <span class="time-meta pull-right "><span class="user-state"></span></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-               
+                <!-- load all user online from server--> 
             </div>
             <div class="row reply" style="background-color: white" >
                 <div class="col-sm-12 searchBox-inner" style="margin-top: -8px">
@@ -345,7 +334,7 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="./asset/bootstrap-3.3.7-dist/js/jquery-3.2.1.js"></script>
 <script src="./asset/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script> 
 <script src="./javascripts/homechat/socket.js"></script>
 <script src="./javascripts/homechat/client_init.js"></script>
 <script src="./javascripts/homechat/client_get_list_useronline.js"></script>
@@ -361,7 +350,7 @@
 <script src="./javascripts/homechat/client_option_change_color.js"></script>
 <script src="./javascripts/homechat/client_option_add_user_to_group.js"></script>
 <script src="./javascripts/homechat/client_option_leave_group.js"></script>
-
+<script src="./javascripts/homechat/client_send_image_message.js"></script>
 </body>
 </html>
 

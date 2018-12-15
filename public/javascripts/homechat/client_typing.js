@@ -36,7 +36,6 @@ $(document).ready(function () {
 	 // kich hoat sự kiện foucusin
 	 $("#comment").focusin(function(){
 		var user_typing_avatar = $(".side .side-one .heading .heading-avatar .heading-avatar-icon img").attr('src');
-		console.log(user_typing_avatar);
 		socket.emit('client-focusin', user_typing_avatar);
 		
 	});

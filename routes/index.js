@@ -5,6 +5,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 const assert = require('assert');
 const Image = require('../models/image');
 const User = require('../models/user');
+const Message = require('../models/message');
 const Author = require('../models/author');
 const Story = require("../models/story");
 const path = require('path');
@@ -135,13 +136,6 @@ router.post('/singup', (req, res) => {
     }); 
 });
 
-// test get session 
-router.get('/get-session', (req, res) => {
-   res.send(req.session.userId);
-});
-
-// logout 
-// GET for logout logout
 router.get('/logout', function (req, res, next) {
     if (req.session) {
       // delete session object
@@ -155,91 +149,13 @@ router.get('/logout', function (req, res, next) {
     }
   });
 
+//
+router.post('/file', (req, res) => {
+    upload(req, res, function (err) {
+      res.send(req.file.filename);
+    });
 
-//test relation in mongoose
-router.get('/test1', (req, res) => {
-   let author = new Author();
-   author.name = 'nguyen hoang Hieu';
-   author.age = 23;
-   author.save((err, author) => {
-       if(err) {
-           res.send(err);
-       } else {
-           console.log('them tac gia thanh cong . xin moi them cac tac pham cua tac gia');
-           let story1 = new Story({
-               creator: author._id,
-               title: 'Tat den'
-           });
-           let story2 = new Story({
-            creator: author._id,
-            title: 'Lang Vu Dai'
-           });
-        let story3 = new Story({
-         creator: author._id,
-         title: 'Ben Que'
-        });
-           Story.insertMany([story1, story2, story3], (err, stories) => {
-               if(err) {
-                   res.send(err);
-               }else {
-                   res.send(stories);
-               }
-           })
-       }
-   })
 });
 
 
-//  tim kiem cac bai viet myTSL.calculateLux( ch0, ch1 )
-router.get('/abc', (req, res) => {
-  Story.findById('5c0ce098fd695127102b7b46').populate('creator', 'name').exec(function(err, result){
-    if(err) {
-        res.send(err);
-    } else {
-        res.send(result);
-    }
-  }) 
-});
-
-
-router.get('/test3', (req, res) => {
-   Story.find({creator: '5c0ce2967acc881f509ac452'}).populate('creator').exec((err, result) => {
-    if(err) {
-        res.send(err);
-    } else {
-        res.send(result);
-    }
-   })
-   
-});
-  // Every String can be casted in ObjectId now
-
-  // liet ke tat ca cac bai viet cua tac gia co id la "5c0ce2967acc881f509ac452"
-  router.get('/test4', (req, res) => {
-     Author.findById('5c0ce2967acc881f509ac452', (err, author) => {
-         if(err) {
-             res.send(err);
-         } else {
-             if(author == null || author == undefined) {
-                 res.send('not find user');
-             } else {
-                 Story.find({creator: author._id}, (err, stories) => {
-                     if(err) {
-                         res.send(err)
-                     } else {
-                        if(stories.length > 0){
-                            stories.forEach((story, index) => {
-                                console.log(index + "-"+ story.title);
-                            })
-                        } else{
-                            console.log('emplty')
-                        }
-                     }
-                 });
-             }
-         }
-     })
-  });
-
-//5c0ccda731048f2a9c9e12d1
 module.exports = router;

@@ -920,12 +920,33 @@ div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
 .search-result-user-group::-webkit-scrollbar{
     width: 5px;
 }
-.search-result-user-group::-webkit-scrollbar-thumb{
-    background-color: rgba(0,0,0,0.3);
-    border-radius: 5px;
-}
 
 /*option group chat*/
 #option-group-chat{
     position: relative;
+}
+
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+    margin-left: -15px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.image-message{
+  display: inline-block;
+  max-width: 300px;
+  max-height: 300px;
 }

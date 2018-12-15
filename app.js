@@ -55,6 +55,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(bodyParser.json());
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
 app.use('/', indexRouter);
@@ -71,6 +73,7 @@ require('./socket/socket_option_chang_name_group')(io);
 require('./socket/socket_option_change_color')(io);
 require('./socket/socket_option_add_user_to_group')(io, arrUser);
 require('./socket/socket_option_leave_group')(io);
+require('./socket/socket_send_image_message')(io)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

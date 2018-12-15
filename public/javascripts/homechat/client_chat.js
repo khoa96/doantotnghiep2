@@ -67,7 +67,6 @@ $(document).ready(function () {
 
 	function sendMessage() {
 		var body = $("#comment").val();
-		var color = 	$('.sender').css('background-color');
 		var group = $(".conversation .heading-avatar-icon-recipient").attr('id'); // id của group
 		var userCreator = $(".side .side-one .heading .heading-username p").text();
 		var idCreator = $(".side .side-one .heading .heading-avatar .heading-avatar-icon").attr('id'); // người  gui tin nhắn vào group
@@ -79,8 +78,6 @@ $(document).ready(function () {
 				avatarSend: $(".side .side-one .heading .heading-avatar .heading-avatar-icon img").attr('src'),
 				group: group,
 				time: new Date(),
-
-				currentColor: color,
 				type: 'text'
 			};
 			// send message to server
@@ -152,7 +149,7 @@ $(document).ready(function () {
 				scrollTop : $('#conversation').get(0).scrollHeight
 			});
 		}
-	} else if(data.type = 'notification') {
+	} else if(data.type == 'notification') {
 		
 		var group_notification = '  <div class="change-group-notification" style="text-align: center;margin-top: 10px;margin-bottom: 20px;height: 40px;"> ';
 		group_notification += ' <p class="time-change">'+ formatDate(new Date(data.time)) +'</p> ';
@@ -168,8 +165,49 @@ $(document).ready(function () {
 		});
 
 	} else {
-		// dang tin nhan hinh anh.
-		console.log('day la  tin nhan hinh anh');
+		if(data.idCreator == id_send){
+			// thêm tin nhắn vào phía người gui
+			var message  = ' <div class="row message-body"> ';
+				message += ' <div class="col-sm-12 message-main-sender"> ';
+				message += ' <div class="sender"  style="background-color: white" > ';
+				message += ' <div class="message-text"> <img src="./uploads/'+data.body+'" class="image-message" /></div>';
+				message += ' <span class="message-time pull-right">'+ formatDate(new Date(data.time)) +'</span> ';
+				message += ' </div> ';
+				message += ' </div> ';
+				message += ' </div> ';
+				$(".list-message").append(message);
+				
+				$(document).find(".list-message-history").find('#'+ data.group).find(".message-history").html('<strong>Bạn: Đã gửi 1 ảnh.</strong>');
+				$(document).find(".list-message-history").find('#'+ data.group).find(".time-meta").html('<strong>'+ formatDate(new Date(data.time)) +'</strong>');
+	
+				$("#conversation").animate({
+				  scrollTop : $('#conversation').get(0).scrollHeight
+				});
+				$(".sender").css('background-color', data.color)
+		} else {
+			// nếu tin nhắn ko phải của mình gui đi.
+			var message = ' <div class="row message-body"> ';
+				message += ' <div class="col-sm-12 message-main-receiver"> ';
+				message += ' <div class="left" style="width: 10%;float: left;margin-top: 10px"> ';
+				message += '  <img src="'+ data.avatarSend +'" style="display: block;with:40px;height: 40px;border-radius: 50%;margin-top: 15px" data-toggle="tooltip" data-placement="left" title="'+data.username_recipient+'"> ';
+				message += ' </div>';
+				message += ' <div class="right" style="width: 90%;float: left;">';
+				message += ' <div class="receiver">';
+				message += ' <div class="message-text" ><img src="./uploads/'+data.body+'" class="image-message"/></div> ';
+				message += ' <span class="message-time pull-right">'+ formatDate(new Date(data.time)) +'</span>';
+				message += ' </div> ';
+				message += ' </div> ';
+				message += ' </div> ';
+				message += ' </div> ';
+	
+			$('.list-message').append(message);
+			$(document).find(".list-message-history").find('#'+ data.group).find(".message-history").html('<strong>'+ data.userCreatdor+ ': Đã gửi 1 ảnh</strong>');
+			$(document).find(".list-message-history").find('#'+ data.group).find(".time-meta").html('<strong>'+ formatDate(new Date(data.time)) +'</strong>');
+	
+			$("#conversation").animate({
+				scrollTop : $('#conversation').get(0).scrollHeight
+			});
+		}
 	}
 	
   })
@@ -224,13 +262,48 @@ $(document).ready(function () {
 		
 			// insert notification to list message
 			$(".list-message").append(group_notification);
-			$("#conversation").animate({
-				scrollTop : $('#conversation').get(0).scrollHeight
-			});
+			
 			
 		} else {
-			// tin nhan dang hinh anh.
-			console.log('tin nhan hinh anh');
+			if(data.idCreator == creator ){
+				// thêm tin nhắn vào phía người gui
+				var message  = ' <div class="row message-body"> ';
+					message += ' <div class="col-sm-12 message-main-sender"> ';
+					message += ' <div class="sender"  style="background-color: white" > ';
+					message += ' <div class="message-text"> <img src="./uploads/'+data[i].body+'" class="image-message"/></div>';
+					message += ' <span class="message-time pull-right">'+ formatDate(new Date(data[i].time)) +'</span> ';
+					message += ' </div> ';
+					message += ' </div> ';
+					message += ' </div> ';
+					$(".list-message").append(message);
+					
+					$(document).find(".list-message-history").find('#'+ data.group).find(".message-history").html('<strong>Bạn:'+data.body+'</strong>');
+					$(document).find(".list-message-history").find('#'+ data.group).find(".time-meta").html('<strong>'+ formatDate(new Date(data.time)) +'</strong>');
+		
+				
+					$(".sender").css('background-color', data.color)
+			} else {
+				// nếu tin nhắn ko phải của mình gui đi.
+				var message = ' <div class="row message-body"> ';
+					message += ' <div class="col-sm-12 message-main-receiver"> ';
+					message += ' <div class="left" style="width: 10%;float: left;margin-top: 10px"> ';
+					message += '  <img src="./uploads/'+ data[i].creator.avatar +'" style="display: block;with:40px;height: 40px;border-radius: 50%;margin-top: 15px" data-toggle="tooltip" data-placement="left" title="'+data.username_recipient+'"> ';
+					message += ' </div>';
+					message += ' <div class="right" style="width: 90%;float: left;">';
+					message += ' <div class="receiver">';
+					message += ' <div class="message-text" ><img src="./uploads/'+data[i].body+'" class="image-message"/></div> ';
+					message += ' <span class="message-time pull-right">'+ formatDate(new Date(data[i].time)) +'</span>';
+					message += ' </div> ';
+					message += ' </div> ';
+					message += ' </div> ';
+					message += ' </div> ';
+		
+				$('.list-message').append(message);
+				$(document).find(".list-message-history").find('#'+ data.group).find(".message-history").html('<strong>'+ data.userCreatdor+ ': ' + data.body+'</strong>');
+				$(document).find(".list-message-history").find('#'+ data.group).find(".time-meta").html('<strong>'+ formatDate(new Date(data.time)) +'</strong>');
+		
+				
+			}
 		}
 	 }
 	 	

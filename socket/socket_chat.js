@@ -19,12 +19,13 @@ module.exports = function(io) {
 
         // server lang nghe yeu cau load lai tin nhan tu phia client cua room chat.
         socket.on('client-request-get-group-message-history-to-server', (data) => {
-            console.log(data); // console.log : roomId
+           
             Message.find({group: data}).populate('creator').exec((err, result) => {
                 if(err) {
                     console.log(err);
                 } else {
                    if(result.length > 0) {
+                       console.log(result)
                     socket.emit('server-send-group-message-history-to-client', result);
                    }
                 }
@@ -44,6 +45,7 @@ module.exports = function(io) {
                 if(err) {
                     console.log(err);
                 } else {
+                    console.log(result)
                    io.sockets.in(socket.room).emit("server-broadcast-message-to-room",data);
                 }  
             })
