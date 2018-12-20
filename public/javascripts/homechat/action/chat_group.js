@@ -48,5 +48,13 @@ $(document).ready(function () {
         $(".box-search-user-group .right").append('<span class="label label-warning" contenteditable="false" id="'+id+'" data-avatar="'+avatar+'">'+username+'</span>').focusin();
         $(".box-search-user-group .left").text("");
 	});
+
+	// bieu tuong cam xuc.
+	 $("#comment").emojioneArea({
+        pickerPosition: "top",
+        hidePickerOnBlur: true,
+        searchPlaceholder: "tìm kiếm",
+        autocomplete: false
+    });
 	
 });
