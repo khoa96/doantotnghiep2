@@ -26,7 +26,8 @@ const roomSchema = new Schema({
 	type: {
 		type: String
 	},
-	id_creator_group: {type: String} 
+	id_creator_group: {type: String},
+	id_recepient: {type: String}
 })
 
 module.exports = mongoose.model('Room', roomSchema, 'rooms');

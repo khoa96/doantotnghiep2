@@ -950,3 +950,6 @@ div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
   max-width: 300px;
   max-height: 300px;
 }
+.zoomable{
+    cursor: pointer;
+}

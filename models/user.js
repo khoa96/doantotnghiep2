@@ -26,6 +26,7 @@ const userSchema = new Schema({
 			type: String,
 			default: 'off'
 		},
+		notifications: [{type: mongoose.Schema.Types.ObjectId, ref: 'Notification'}],
 		groups: [{type: mongoose.Schema.Types.ObjectId, ref: 'Room'}],
 		messages: [{type: mongoose.Schema.Types.ObjectId, ref: 'Message'}]
 })

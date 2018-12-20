@@ -79,7 +79,7 @@ $(document).ready(function () {
 	var id_creator_group = $(".side .side-one .heading .heading-avatar .heading-avatar-icon").attr('id');
 	if(data.id_creator_group == id_creator_group) {
 		
-		var group = ' <div class="row sideBar-body" id="'+data._id+'" >';
+		var group = ' <div class="row sideBar-body" id="'+data._id+'" data-recepient="'+data.id_recepient+'" >';
 		group += ' <div class="col-sm-3 col-xs-3 sideBar-avatar"> ';
 		group += ' <div class="avatar-icon">';
 		group += ' <img src="'+ data.avatar_recepient +'">';
@@ -176,6 +176,7 @@ $(document).on('click','#btn-click-create-group',function(){
 		} else if (listUser.length  == 1) {
 		   // day la truong hop chat private.
 			 var avatar_recipient = listUser.data('avatar'); // avatar người nhận
+			 var id_recepient = listUser.attr('id');
 			 var username_recepient = listUser.text();
 			 var room = {
 				name: groupName,
@@ -184,6 +185,7 @@ $(document).on('click','#btn-click-create-group',function(){
 				avatar_send: avatar_send,
 				avatar_recepient: avatar_recipient,
 				id_creator_group: id_create_group,
+				id_recepient: id_recepient,
 				arrUserId: arrUserId
 			}
 			console.log(room);
@@ -193,6 +195,8 @@ $(document).on('click','#btn-click-create-group',function(){
 	} else {
 		alert('Số thành viên trong phòng phải lớn hơn 1');
 	}
+	// xoa di thanh hien thi so thanh vien trong nhom
+	  $(document).find('.box-search-user-group .right').html("")
     
    });
 });

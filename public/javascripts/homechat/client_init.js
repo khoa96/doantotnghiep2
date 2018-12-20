@@ -56,7 +56,7 @@ $(document).ready(function () {
 			var id_creator_group = $(".side .side-one .heading .heading-avatar .heading-avatar-icon").attr('id');
 	        if(rooms[i].id_creator_group == id_creator_group) {
 		
-				var group = ' <div class="row sideBar-body" id="'+ rooms[i]._id+'" >';
+				var group = ' <div class="row sideBar-body" id="'+ rooms[i]._id+'" data-recepient="'+rooms[i].id_recepient+'" > ';
 					group += ' <div class="col-sm-3 col-xs-3 sideBar-avatar"> ';
 					group += ' <div class="avatar-icon">';
 					group += ' <img src="'+ rooms[i].avatar_recepient +'">';
@@ -79,7 +79,7 @@ $(document).ready(function () {
 
 			} else {
 		
-				var group = ' <div class="row sideBar-body" id="'+ rooms[i]._id +'" >';
+				var group = ' <div class="row sideBar-body" id="'+ rooms[i]._id +'" data-recepient="'+rooms[i].id_creator_group+'">';
 					group += ' <div class="col-sm-3 col-xs-3 sideBar-avatar"> ';
 					group += ' <div class="avatar-icon">';
 					group += ' <img src="'+ rooms[i].avatar_send +'">';

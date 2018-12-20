@@ -89,6 +89,7 @@ module.exports = function(io, arrUser) {
 							 avatar_send: data.avatar_send,
 							 avatar_recepient: data.avatar_recepient,
 							 id_creator_group: data.id_creator_group,
+							 id_recepient: data.id_recepient,
 							 members: data.arrUserId,
 							 type: 'private'
 

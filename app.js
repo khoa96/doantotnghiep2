@@ -74,6 +74,8 @@ require('./socket/socket_option_change_color')(io);
 require('./socket/socket_option_add_user_to_group')(io, arrUser);
 require('./socket/socket_option_leave_group')(io);
 require('./socket/socket_change_avatar_group')(io)
+require('./socket/socket_notification')(io, arrUser)
+require('./socket/socket_load_previous_message')(io)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

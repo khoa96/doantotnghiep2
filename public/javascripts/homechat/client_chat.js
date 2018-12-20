@@ -1,8 +1,8 @@
 $(document).ready(function () {
 	//-------------------------FUNCTION CHO CHUC NANG CHAT ---------------------
-	function changeHeadingBoxGroupChat (roomId, roomName, roomAvatar){
+	function changeHeadingBoxGroupChat (roomId, roomName, roomAvatar, id_recepient){
 		var heading =  ' <div class="col-sm-2 col-md-1 col-xs-3 heading-avatar"> ';
-		heading += ' <div class="heading-avatar-icon heading-avatar-icon-recipient" id="'+ roomId +'"> ';
+		heading += ' <div class="heading-avatar-icon heading-avatar-icon-recipient" id="'+ roomId +'" data-recepient="'+id_recepient+'"> ';
 		heading += ' <img src="'+ roomAvatar +'"> ';
 		heading += ' </div> ';
 		heading += ' </div> ';
@@ -99,6 +99,24 @@ $(document).ready(function () {
 		var strTime = hours + ':' + minutes + ' ' + ampm;
 		return date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
 	}
+
+	// ham gui  thong bao den server.
+	function sendNotification(){
+		var id_recepient  = $(".conversation .heading .heading-avatar-icon-recipient").data('recepient'); //id recipient
+		var id_send = $(".side .side-one .heading .heading-avatar .heading-avatar-icon").attr('id');
+		var username_send = $(".side .side-one .heading .heading-username p").text();
+		var avatar_send = $(".side .side-one .heading .heading-avatar img").attr('src');
+		var notification = {
+			id_send: id_send,
+			body: username_send + " đã gửi tin nhắn tới bạn",
+			id_recepient: id_recepient,
+			time: new Date(),
+			username_send: username_send,
+			avatar_send: avatar_send
+		}
+		
+		socket.emit('client-send-notification-to-server', notification);
+	}
 	
   //------------------------------END FUNCTION ---------------------
 
@@ -171,7 +189,7 @@ $(document).ready(function () {
 			var message  = ' <div class="row message-body"> ';
 				message += ' <div class="col-sm-12 message-main-sender" style="margin-bottom:20px"> ';
 				message += ' <div class="sender"  style="background-color: white" > ';
-				message += ' <div class="message-text"> <img src="./uploads/'+data.body+'" class="image-message" /></div>';
+				message += ' <div class="message-text"> <img src="./uploads/'+data.body+'" class="image-message zoomable" /></div>';
 				message += ' <span class="message-time pull-right" style="color: #333">'+ formatDate(new Date(data.time)) +'</span> ';
 				message += ' </div> ';
 				message += ' </div> ';
@@ -194,7 +212,7 @@ $(document).ready(function () {
 				message += ' </div>';
 				message += ' <div class="right" style="width: 90%;float: left;">';
 				message += ' <div class="receiver">';
-				message += ' <div class="message-text" ><img src="./uploads/'+data.body+'" class="image-message"/></div> ';
+				message += ' <div class="message-text" ><img src="./uploads/'+data.body+'" class="image-message zoomable"/></div> ';
 				message += ' <span class="message-time pull-right">'+ formatDate(new Date(data.time)) +'</span>';
 				message += ' </div> ';
 				message += ' </div> ';
@@ -230,7 +248,7 @@ $(document).ready(function () {
 				   message += ' </div> ';
 				   message += ' </div> ';
 				   message += ' </div> ';
-				   $(".list-message").append(message);
+				   $(".list-message").prepend(message);
 
 		    } else {
 				// neu kola tin nhan cua user.
@@ -248,7 +266,7 @@ $(document).ready(function () {
 				message += ' </div> ';
 				message += ' </div> ';
 				message += ' </div> ';
-				$('.list-message').append(message);
+				$('.list-message').prepend(message);
    
 			}
 		
@@ -262,7 +280,7 @@ $(document).ready(function () {
 			group_notification += ' </div> ';
 		
 			// insert notification to list message
-			$(".list-message").append(group_notification);
+			$(".list-message").prepend(group_notification);
 			
 			
 		} else {
@@ -271,12 +289,12 @@ $(document).ready(function () {
 				var message  = ' <div class="row message-body"> ';
 					message += ' <div class="col-sm-12 message-main-sender" style="margin-bottom:20px"> ';
 					message += ' <div class="sender"  style="background-color: white" > ';
-					message += ' <div class="message-text"> <img src="./uploads/'+data[i].body+'" class="image-message"/></div>';
+					message += ' <div class="message-text"> <img src="./uploads/'+data[i].body+'" class="image-message zoomable"/></div>';
 					message += ' <span class="message-time pull-right" style="color: #333">'+ formatDate(new Date(data[i].time)) +'</span> ';
 					message += ' </div> ';
 					message += ' </div> ';
 					message += ' </div> ';
-					$(".list-message").append(message);
+					$(".list-message").prepend(message);
 					
 					$(document).find(".list-message-history").find('#'+ data.group).find(".message-history").html('<strong>Bạn:'+data.body+'</strong>');
 					$(document).find(".list-message-history").find('#'+ data.group).find(".time-meta").html('<strong>'+ formatDate(new Date(data.time)) +'</strong>');
@@ -292,14 +310,14 @@ $(document).ready(function () {
 					message += ' </div>';
 					message += ' <div class="right" style="width: 90%;float: left;">';
 					message += ' <div class="receiver">';
-					message += ' <div class="message-text" ><img src="./uploads/'+data[i].body+'" class="image-message"/></div> ';
+					message += ' <div class="message-text" ><img src="./uploads/'+data[i].body+'" class="image-message zoomable"/></div> ';
 					message += ' <span class="message-time pull-right">'+ formatDate(new Date(data[i].time)) +'</span>';
 					message += ' </div> ';
 					message += ' </div> ';
 					message += ' </div> ';
 					message += ' </div> ';
 		
-				$('.list-message').append(message);
+				$('.list-message').prepend(message);
 				$(document).find(".list-message-history").find('#'+ data.group).find(".message-history").html('<strong>'+ data.userCreatdor+ ': ' + data.body+'</strong>');
 				$(document).find(".list-message-history").find('#'+ data.group).find(".time-meta").html('<strong>'+ formatDate(new Date(data.time)) +'</strong>');
 		
@@ -326,7 +344,8 @@ $(document).ready(function () {
 	$(document).on('click','.list-message-history .sideBar-body', function (){
       
         var id_send = $(".side .side-one .heading .heading-avatar .heading-avatar-icon").attr('id');
-        var roomName = $(this).find(".sideBar-main .sideBar-name .name-meta").text();
+		var roomName = $(this).find(".sideBar-main .sideBar-name .name-meta").text();
+		var id_recepient = $(this).data('recepient');
         var roomAvatar = $(this).find(".sideBar-avatar .avatar-icon img").attr('src');
         var roomId = $(this).attr('id');
 	  
@@ -334,7 +353,7 @@ $(document).ready(function () {
             $(".list-message-history").prepend($(this)[0]);
 
         // buoc 2 : thay doi noi dung cua heading chat.
-           changeHeadingBoxGroupChat(roomId, roomName, roomAvatar);
+           changeHeadingBoxGroupChat(roomId, roomName, roomAvatar, id_recepient);
 
         // buoc3 :. change main box chat equals null
 			$(".list-message").html("");
@@ -353,12 +372,14 @@ $(document).ready(function () {
     $("#btn-click-send-message").click(function() {
 		sendMessage();
 		//sendNotificationToClient();
+		sendNotification();
    });
 
    // khi click enter để send message
    $("#comment").keyup(function(e) {
        if(e.keyCode == 13) {
 		  sendMessage();
+		  sendNotification();
 	   }
 	   
    });
