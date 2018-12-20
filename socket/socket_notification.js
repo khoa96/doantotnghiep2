@@ -7,9 +7,9 @@ module.exports = function(io, arrUser) {
 io.on('connection', function(socket) { 
 		// lang nghe su kien client gui thong bao len phia server.
 		socket.on('client-send-notification-to-server', (data) => {
-			const creator = data.id_send;
+			const creator = data.id_send; // nguoi gui
 			const body = data.body;
-			const id_recepient  = data.id_recepient;
+			const id_recepient  = data.id_recepient; // nguoi nhan
 			const time = data.time;
 			const notification = new Notification({
 			   creator: creator,
@@ -25,7 +25,7 @@ io.on('connection', function(socket) {
 					for(var i = 0;i < arrUser.length; i++){
 						if(arrUser[i].id_send == id_recepient ){
 							socket.to(arrUser[i].socket_id).emit('server-send-notification-to-client', data);
-							console.log('emit thanh cong')
+							//console.log('emit thanh cong')
 							break;
 						}
 					}

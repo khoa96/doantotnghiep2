@@ -13,10 +13,9 @@ io.on('connection', function(socket) {
 					console.log(err)
 				} else {
 				   if(messages.length > 0) {
-					   console.log(messages)
 					   socket.emit('server-send-previous-message-group-to-client', messages)
 				   }
-				}
+				} 
 			})
 		})
 	 });

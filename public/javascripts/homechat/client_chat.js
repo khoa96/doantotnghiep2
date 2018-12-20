@@ -114,7 +114,7 @@ $(document).ready(function () {
 			username_send: username_send,
 			avatar_send: avatar_send
 		}
-		
+		console.log(notification);
 		socket.emit('client-send-notification-to-server', notification);
 	}
 	

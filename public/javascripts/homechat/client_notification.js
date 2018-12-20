@@ -31,8 +31,8 @@ $(document).ready(function () {
 			notification += ' </div> ';
 			notification += ' </div> ';
 			notification += ' </div> ';
-
-		if(id_recepient != data.id_recepient){
+        console.log(id_recepient)
+		if(id_recepient != data.id_send){
 			if(count_notification == ""){
 				$(".notification-count").text(1);
 			}else{
