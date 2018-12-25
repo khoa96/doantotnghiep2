@@ -7,7 +7,7 @@ $(document).ready(function () {
 		var groupId = $(".conversation .heading .heading-avatar .heading-avatar-icon-recipient").attr('id');
 		var file = e.target.files[0];
 		var formData = new FormData();
-		formData.append('image', files[0]);
+		formData.append('image', file);
 		$.ajax({
 			type: "post",
 			url: "/file",
