@@ -27,15 +27,12 @@ $(document).ready(function () {
 							group: groupId,
 							time: new Date(),
 							type: 'image'
-		
 						}
-						
 						socket.emit('client-send-group-message-to-server',message);
 					}
 				 }
 			},
 			crossDomain: true
-		    
 		});
 	
 	})

@@ -67,7 +67,7 @@ $(document).ready(function () {
 					group += ' <div class="row"> ';
 					group += ' <div class="col-sm-8 col-xs-8 sideBar-name">';
 					group += ' <p class="name-meta" ><strong>'+ rooms[i].username_recepient+'</strong></p>';
-					group += ' <p class="message-history">last message</p></p>';
+					group += ' <p class="message-history"></p>';
 					group += ' </div>';
 					group += ' <div class="col-sm-4 col-xs-4 pull-right sideBar-time"> ';
 					group += ' <span class="time-meta pull-right"></span>';
@@ -90,7 +90,7 @@ $(document).ready(function () {
 					group += ' <div class="row"> ';
 					group += ' <div class="col-sm-8 col-xs-8 sideBar-name">';
 					group += ' <p class="name-meta" ><strong>'+ rooms[i].username_send +'</strong></p>';
-					group += ' <p class="message-history">last message</p>';
+					group += ' <p class="message-history"></p>';
 					group += ' </div>';
 					group += ' <div class="col-sm-4 col-xs-4 pull-right sideBar-time"> ';
 					group += ' <span class="time-meta pull-right"></span>';
