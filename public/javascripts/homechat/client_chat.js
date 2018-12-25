@@ -22,7 +22,6 @@ $(document).ready(function () {
 		heading += ' </li> ';
 		heading += ' <ul class="sub-menu collapse" id="heading"> ';
 		heading += ' <li class="change-name-group">Đổi tên nhóm</li> ';
-		heading += ' <li class="change-name-member">Chỉnh sửa biệt danh</li>';
 		heading += ' <li class="change-avatar-group">Thay đổi avatar của nhóm</li>';
 		heading += ' <li class="click-change-color">Thay đổi màu sắc</li>';
 		heading += ' <li class="click-out-group">Rời khỏi nhóm</li> ';
