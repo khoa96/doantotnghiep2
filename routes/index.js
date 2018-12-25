@@ -141,6 +141,8 @@ router.post('/singup', (req, res) => {
     }); 
 });
 
+
+// ROUTER GET logout
 router.get('/logout', function (req, res, next) {
     if (req.session) {
       // delete session object
@@ -154,7 +156,7 @@ router.get('/logout', function (req, res, next) {
     }
   });
 
-//
+//ROUTER POST upload file
 router.post('/file', (req, res) => {
     upload(req, res, function (err) {
         if(req.file == null || req.file == undefined || req.file == ""){
@@ -168,6 +170,11 @@ router.post('/file', (req, res) => {
         }
     });
 
+});
+
+// ROUTER GET profile
+router.get('/profile', (req, res) => {
+   res.render('profile/profile');
 });
 
 

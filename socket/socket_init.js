@@ -6,7 +6,7 @@ const Message = require('../models/message');
 const ObjectId = mongoose.Types.ObjectId;
 const router = express.Router();
 module.exports = function(io, arrUser) {
-
+   
     io.on('connection', function(socket) { 
         // lang nghe su kien client send user login to server
         socket.on('client-send-info-to-server',function(data){
@@ -28,17 +28,17 @@ module.exports = function(io, arrUser) {
                 } else {
 
                        let arrLastMessage = [];
-                    //  rooms.forEach(room => {
-                    //       Message.find({group: room._id}).sort({time: -1}).limit(1).exec((err, last_messge) => {
-                    //         if(err) {
-                    //              console.log(err)
-                    //           } else {
-                    //                arrLastMessage.push(last_messge);
-                    //             }
+                    //    rooms.forEach(room => {
+                    //        Message.find({group: room._id}).sort({time: -1}).limit(1).exec((err, message) => {
+                    //            if(err) {
+                    //                console.log(err)
+                    //            } else {
+                    //                arrLastMessage.push(message)
+                    //            }
                     //        })
-                    //     });
-                  
-                       socket.emit('server-send-all-group-to-client', {rooms: rooms, arrLastMessage: arrLastMessage});
+                    //    });
+                    socket.emit('server-send-all-group-to-client', {rooms: rooms, arrLastMessage: arrLastMessage});
+                    
                 }
            })
         });

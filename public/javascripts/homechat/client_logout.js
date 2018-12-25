@@ -7,7 +7,6 @@ $(document).ready(function () {
 		$(".list-user-online").find("#"+data).hide('slow');
 	});
 
-
 	//client kich hoat su kien logout
 	$("#btn-click-logout").click(function() {
 		var user_id = $(".heading-avatar .heading-avatar-icon").attr('id');

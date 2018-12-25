@@ -5,10 +5,9 @@ $(document).ready(function () {
 		var creator =  $(".side .side-one .heading .heading-avatar .heading-avatar-icon").attr('id');
 		var userCreator = $(".side .side-one .heading .heading-username p").text();
 		var groupId = $(".conversation .heading .heading-avatar .heading-avatar-icon-recipient").attr('id');
-		console.log(groupId)
 		var file = e.target.files[0];
 		var formData = new FormData();
-		formData.append('image', file);
+		formData.append('image', files[0]);
 		$.ajax({
 			type: "post",
 			url: "/file",

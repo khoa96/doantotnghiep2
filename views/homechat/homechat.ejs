@@ -38,10 +38,17 @@
                     <div class="col-sm-5 col-xs-3 heading-username" style="padding:0;">
                         <p style="font-size: 14px;margin-top: 20px;font-weight: bold; display: block; overflow:hidden; text-overflow: ellipsis; white-space: nowrap"><%= homechatInfo.user.username %>   </p>
                     </div>
-                    <div class="col-sm-1 col-xs-2  heading-compose  pull-right" id="btn-click-logout">
-                        <a href="logout">
-                            <span class="glyphicon glyphicon-log-out pull-right"  data-toggle="tooltip" title="Đăng xuất" data-placement="bottom" ></span>
-                        </a>
+                    <div class="col-sm-1 col-xs-2  heading-compose  pull-right" id="">
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"  style="background: none; margin-left:-15px; margin-top:-5px">
+                                 <span class="glyphicon glyphicon-user pull-right"  data-toggle="tooltip" title="your account" data-placement="bottom" ></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                <li role="presentation" id="click-change-info"><a role="menuitem" tabindex="-1" href="#">Thay đổi thông tin cá nhân</a></li>
+                                <li role="presentation" class="divider"></li>
+                                <li role="presentation" ><a role="menuitem" tabindex="-1" href="/logout" id="btn-click-logout" >Đăng xuất</a></li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="col-sm-2 col-xs-2 heading-compose  pull-right" id="btn-click-chat-group">
                         <span class="glyphicon glyphicon-edit pull-right" data-toggle="tooltip" title="Chat Nhóm" data-placement="bottom"></span>
@@ -313,6 +320,51 @@
         </div>
     </div>
     <!--end  modal add user to group-->
+
+    <!---modal change info -->
+    <div class="modal fade animated  zoomIn" id="modal-change-info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 450px;">
+            <div class="modal-content">
+                
+                <div class="modal-body">
+                   <form>
+                        <div class="image-holder">
+                                <img src="./uploads/<%= homechatInfo.user.avatar %>"  style="display: block; width: 150px; height: 150px; border-radius: 50%;margin:  20px auto;" />
+                        </div> 
+                        <button class="btn btn-primary btn-block" type="button">
+                             <span >
+                                 <input id="fileUpload" type="file" name="imageChangeInfo" id="image" accept=".jpg,.jpeg,.png" />
+                            </span>
+                         </button>
+                        
+                        <div class="form-info" style="padding:10px">
+                            <div class="form-group">
+                                 <label>Username</label>
+                                 <input class="form-control" type="text" name="username" placeholder="username" value="<%= homechatInfo.user.username %>">
+                            </div>
+                        <div class="form-group">
+                            <label>Mật khẩu hiện tại</label>
+                            <input class="form-control" type="password" name="curenrtPassword" placeholder="nhập mật khẩu hiện tại của bạn" value="<%= homechatInfo.user.password %>">
+                         </div>
+                        <div class="form-group">
+                            <label>Mật khẩu mới</label>
+                             <input class="form-control" type="password" name="newPassword" placeholder="nhập mật khẩu mới của bạn">
+                         </div>
+                        <div class="form-group">
+                            <label>Xác nhận mật khẩu </label>
+                             <input class="form-control" type="password"  name="confirmPassword" placeholder="xác nhận mật khẩu"></div>
+                            </div>
+                        </div>
+                   </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="btn-click-change-user-info" data-dismiss="modal" style="font-weight: bold;color: #0084ff;">Lưu thay đổi</button>
+                    <button type="button" class="btn btn-default" id="btn-click-hide-modal-change-user-info" data-dismiss="modal" style="color: #0084ff;">Hủy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!---->
 </div>
 </div>
 </div>
@@ -342,7 +394,9 @@
 <script src="./javascripts/homechat/action/notification.js"></script>
 <script src="./javascripts/homechat/load-previous-message.js"></script>
 <script src="./javascripts/homechat/action/zoomable.js"></script>
-<script type="text/javascript" src="./javascripts/homechat/action/emoji.js"></script>
+<script src="./javascripts/homechat/client_change_info.js"></script>
+<script src="./javascripts/homechat/action/emoji.js"></script>
+
 </body>
 </html>
 

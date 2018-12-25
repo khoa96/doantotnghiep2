@@ -26,6 +26,7 @@ $(document).ready(function () {
 	   //  data la 1 mang cac group ma user da tham gia.
 	   var rooms = data.rooms;
 	   var arrLastMessage = data.arrLastMessage;
+	   console.log(arrLastMessage)
 	   
 	   for(var i = 0; i < rooms.length; i++) {
 		   if(rooms[i].type == 'group') {

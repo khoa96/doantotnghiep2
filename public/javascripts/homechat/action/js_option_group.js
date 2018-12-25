@@ -53,6 +53,17 @@ $(document).ready(function(){
     $(document).on('click', '#btn-click-hide-modal-add-user-to-group', function(){
         $("#modal-add-user-to-group").toggleClass('zoomOut');
     });
+
+    // model change info.
+    $(document).on('click', '#click-change-info', function () {
+        $("#modal-change-info").modal('show').removeClass('zoomOut');
+    });
+
+    $(document).on('click', '#btn-click-hide-modal-change-user-info', function(){
+        $("#modal-change-info").toggleClass('zoomOut');
+    });
+
+
     $(document).on('click', '.user', function () {
         var id = $(this).attr('id');
         var avatar = $(this).find('.avatar img').attr('src');
