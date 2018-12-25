@@ -49,12 +49,5 @@ $(document).ready(function () {
         $(".box-search-user-group .left").text("");
 	});
 
-	// bieu tuong cam xuc.
-	 $("#comment").emojioneArea({
-        pickerPosition: "top",
-        hidePickerOnBlur: true,
-        searchPlaceholder: "tìm kiếm",
-        autocomplete: false
-    });
 	
 });
